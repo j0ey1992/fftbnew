@@ -9,7 +9,7 @@ export const SWAP_FEE_CONFIG = {
   /**
    * Team wallet address that receives swap fees
    */
-  TEAM_WALLET: '0x3921168b3fe5167fa15312c8e4436bb974ce8d71',
+  TEAM_WALLET: process.env.NEXT_PUBLIC_TEAM_WALLET_ADDRESS || '',
 
   /**
    * Fee percentage (0.3% = 0.003)

@@ -12,8 +12,8 @@ import {
 } from '@/lib/firebase/order-service'
 import { useWalletTransfer } from './useWalletTransfer'
 
-// Merchant wallet address - this should be moved to an environment variable in production
-const MERCHANT_WALLET_ADDRESS = '0xD3eBF04f76B67e47093bDDd8B14f9090f1c80976'
+// Merchant wallet address from environment variable
+const MERCHANT_WALLET_ADDRESS = process.env.NEXT_PUBLIC_MERCHANT_WALLET_ADDRESS || ''
 
 // Interface for the order creation data
 export interface OrderCreationData {

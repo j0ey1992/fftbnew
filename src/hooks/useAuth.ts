@@ -137,8 +137,8 @@ export function useAuth() {
       setWalletType(detectedWalletType);
       
       // Check if this is the admin wallet address
-      const adminWalletAddress = '0xd3ebf04f76b67e47093bddd8b14f9090f1c80976';
-      const normalizedAdminAddress = normalizeAddress(adminWalletAddress);
+      const adminWalletAddress = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS || '';
+      const normalizedAdminAddress = adminWalletAddress ? normalizeAddress(adminWalletAddress) : '';
       const isAdminWallet = normalizedAddress === normalizedAdminAddress;
       
       // Request challenge
