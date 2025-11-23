@@ -1,0 +1,8 @@
+/* Only preserve minimal styles for modal functionality */
+:global(.w3m-overlay) {
+  z-index: 9999 !important;
+}
+
+:global([data-appkit-active="true"]) {
+  overflow: hidden;
+}

@@ -1,0 +1,58 @@
+/* ConnectWallet module styles */
+
+/* Wrapper for appkit-button to ensure proper styling */
+.appkitButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Custom styling for appkit-button to match existing theme */
+.appkitButtonWrapper :global(appkit-button) {
+  --w3m-accent-fill-color: var(--color-primary);
+  --w3m-accent-color: var(--color-primary);
+  --w3m-button-font-family: var(--font-primary), sans-serif;
+  --w3m-text-big-bold-size: 16px;
+  --w3m-button-border-radius: 8px;
+  min-width: 160px;
+}
+
+/* When wallet is connected */
+.walletConnected {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  gap: 10px;
+}
+
+.walletConnected__status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.walletConnected__address {
+  font-size: 14px;
+  line-height: 1.2;
+  color: white;
+}
+
+.walletConnected__balance {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.walletConnected__disconnect {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}

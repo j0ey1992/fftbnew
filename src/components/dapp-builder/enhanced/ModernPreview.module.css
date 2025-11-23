@@ -1,0 +1,515 @@
+/* Modern Preview Styles */
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0f172a;
+  position: relative;
+}
+
+.preview.fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0a0f1c;
+}
+
+/* Controls Bar */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+/* Device Selector */
+.deviceSelector {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 8px;
+}
+
+.deviceButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deviceButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.deviceButton.active {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.deviceButton svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+/* Page Info */
+.pageInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e2e8f0;
+  font-size: 0.875rem;
+}
+
+.pageInfo code {
+  padding: 0.25rem 0.5rem;
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* View Controls */
+.viewControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Mode Toggle */
+.modeToggle {
+  display: flex;
+  padding: 0.25rem;
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 8px;
+  gap: 0.25rem;
+}
+
+.modeButton {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modeButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.modeButton.active {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+/* View Options */
+.viewOption {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 41, 59, 0.5);
+  border: none;
+  border-radius: 8px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewOption:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+}
+
+.viewOption.active {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.viewOption svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+/* Device Container */
+.deviceContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  background: #0a0f1c;
+}
+
+/* Light background pattern for better contrast */
+.deviceContainer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(45deg, #1e293b 25%, transparent 25%),
+    linear-gradient(-45deg, #1e293b 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1e293b 75%),
+    linear-gradient(-45deg, transparent 75%, #1e293b 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  opacity: 0.05;
+}
+
+/* Device Frame */
+.device {
+  position: relative;
+  background: #ffffff;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    0 20px 40px -5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+/* High Contrast Mode */
+.device.highContrast {
+  background: #f8fafc;
+  box-shadow: 
+    0 0 0 2px #3b82f6,
+    0 10px 25px -5px rgba(59, 130, 246, 0.3),
+    0 20px 40px -5px rgba(59, 130, 246, 0.2);
+}
+
+.device.highContrast .minimalHeader,
+.device.highContrast .minimalFooter {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #3b82f6;
+}
+
+.device.highContrast .connectButton {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+/* Device-specific styles */
+.deviceContainer.mobile .device {
+  max-width: 375px;
+  min-height: 667px;
+  border-radius: 20px;
+}
+
+.deviceContainer.tablet .device {
+  max-width: 768px;
+  min-height: 600px;
+  border-radius: 16px;
+}
+
+.deviceContainer.desktop .device {
+  width: 100%;
+  height: 100%;
+  max-width: 1280px;
+  max-height: 800px;
+  border-radius: 8px;
+}
+
+/* Device Frame Decoration */
+.deviceFrame {
+  position: absolute;
+  inset: -10px;
+  background: #1e293b;
+  border-radius: 30px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.mobile .deviceFrame {
+  inset: -8px;
+  border-radius: 28px;
+}
+
+.tablet .deviceFrame {
+  inset: -8px;
+  border-radius: 24px;
+}
+
+/* Notch for mobile */
+.notch {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 28px;
+  background: #1e293b;
+  border-radius: 0 0 20px 20px;
+}
+
+/* Minimal Header */
+.minimalHeader {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(248, 250, 252, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  height: 56px;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.connectButton {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  color: #3b82f6;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.connectButton:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  background: white;
+}
+
+/* Grid overlay */
+.mainContent.showGrid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Minimal Footer */
+.minimalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(248, 250, 252, 0.95);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  height: 48px;
+}
+
+.minimalFooter p {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Size Indicator */
+.sizeIndicator {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(30, 41, 59, 0.9);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* Enhance component visibility */
+.mainContent :global(.component-wrapper) {
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.mainContent :global(.component-wrapper:hover) {
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* Ensure components have proper spacing and visibility */
+.mainContent :global([data-component]) {
+  min-height: 100px;
+  position: relative;
+  padding: 1rem;
+  margin: 0.5rem;
+  background: rgba(248, 250, 252, 0.5);
+  border: 1px dashed rgba(203, 213, 225, 0.5);
+  border-radius: 8px;
+}
+
+.mainContent :global([data-component]:hover) {
+  background: rgba(248, 250, 252, 0.8);
+  border-color: #3b82f6;
+  border-style: solid;
+}
+
+/* Component labels in edit mode */
+.mainContent :global([data-component])::before {
+  content: attr(data-component-type);
+  position: absolute;
+  top: -0.5rem;
+  left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  background: #3b82f6;
+  color: white;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  text-transform: capitalize;
+  z-index: 10;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .deviceSelector {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pageInfo {
+    order: 1;
+    flex: 1;
+  }
+
+  .viewControls {
+    order: 3;
+  }
+}
+
+/* Component Container */
+.componentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  min-height: 100%;
+}
+
+/* Component Wrapper */
+.componentWrapper {
+  position: relative;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.componentWrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #94a3b8;
+  border: 2px dashed rgba(148, 163, 184, 0.3);
+  border-radius: 12px;
+  margin: 2rem;
+}
+
+.emptyState svg {
+  stroke-width: 1.5;
+  margin-bottom: 1rem;
+}
+
+.emptyState p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.device {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #64748b;
+}
+
+.loading::after {
+  content: '';
+  width: 32px;
+  height: 32px;
+  margin-left: 1rem;
+  border: 3px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

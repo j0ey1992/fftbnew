@@ -1,0 +1,35 @@
+.dragOverlay {
+  background-color: white;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  opacity: 0.9;
+}
+
+.componentPreview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.componentIcon {
+  font-size: 32px;
+}
+
+.componentInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.componentType {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  text-transform: capitalize;
+}
+
+.componentId {
+  font-size: 12px;
+  color: #6b7280;
+}

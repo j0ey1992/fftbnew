@@ -1,0 +1,99 @@
+:root {
+  /* Main Brand Colors - Crypto.com inspired */
+  --background: #000711;
+  --foreground: #ffffff;
+  --primary: #0072ff;
+  --secondary: #00c2ff;
+  --accent: #00ffcc;
+  --roo-orange: #ff6838;
+  --roo-purple: #7c3aed;
+  
+  /* Color Variations */
+  --primary-dark: #0056cc;
+  --primary-light: #409fff;
+  --secondary-dark: #0095cc;
+  --secondary-light: #40d4ff;
+  --accent-dark: #00cc9f;
+  --accent-light: #40ffe0;
+  --roo-orange-light: #ff8a66;
+  
+  /* UI Colors */
+  --success: #0ccd92;
+  --warning: #ffa631;
+  --error: #ff4e4e;
+  --info: #3B82F6;
+  
+  /* Neutral Colors */
+  --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --black: #000000;
+  
+  /* App-specific Colors */
+  --card-bg: rgba(10, 15, 35, 0.75);
+  --card-bg-light: rgba(20, 30, 55, 0.6);
+  --nav-bg: rgba(0, 7, 17, 0.98);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-highlight: rgba(255, 255, 255, 0.1);
+  --deep-blue: #000A1A;
+  
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --shadow-glass-dark: 0 4px 30px rgba(0, 0, 0, 0.2);
+  
+  /* Typography */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  
+  /* Z-Index */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-100: 100;
+}
+
+/* Dark Mode Colors - For future use */
+:root.dark {
+  /* Can be expanded with dark mode specific colors */
+}
+
+/* For Mobile Optimization */
+@media (max-width: 640px) {
+  :root {
+    /* Adjust values for mobile if needed */
+  }
+}

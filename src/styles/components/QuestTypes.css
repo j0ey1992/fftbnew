@@ -1,0 +1,498 @@
+/* Quest Type-Specific Styling and Visual Indicators */
+
+/* =============== Quest Type Color Schemes =============== */
+
+:root {
+  /* Social Media Quest Colors */
+  --social-twitter-primary: #1DA1F2;
+  --social-twitter-secondary: #0D8BD9;
+  --social-reddit-primary: #FF4500;
+  --social-reddit-secondary: #E03D00;
+  --social-discord-primary: #5865F2;
+  --social-discord-secondary: #4752C4;
+  --social-telegram-primary: #0088CC;
+  --social-telegram-secondary: #006699;
+  
+  /* Engagement Quest Colors */
+  --engagement-community-primary: #8B5CF6;
+  --engagement-community-secondary: #7C3AED;
+  --engagement-dex-primary: #10B981;
+  --engagement-dex-secondary: #059669;
+  --engagement-cmc-primary: #FFB800;
+  --engagement-cmc-secondary: #E6A600;
+  
+  /* Web3/DeFi Quest Colors */
+  --web3-token-primary: #01E5A9;
+  --web3-token-secondary: #00D4AA;
+  --web3-nft-primary: #F59E0B;
+  --web3-nft-secondary: #D97706;
+  --web3-defi-primary: #6366F1;
+  --web3-defi-secondary: #4F46E5;
+  --web3-staking-primary: #8B5CF6;
+  --web3-staking-secondary: #7C3AED;
+  
+  /* Difficulty Colors */
+  --difficulty-easy: #10B981;
+  --difficulty-medium: #F59E0B;
+  --difficulty-hard: #EF4444;
+  --difficulty-expert: #8B5CF6;
+}
+
+/* =============== Social Media Quest Types =============== */
+
+/* Twitter Quests */
+.quest-type-twitter_like_retweet,
+.quest-type-twitter_comment,
+.quest-type-twitter_combined_actions {
+  border-left: 4px solid var(--social-twitter-primary);
+  background: linear-gradient(135deg, 
+    rgba(29, 161, 242, 0.05) 0%, 
+    rgba(13, 139, 217, 0.02) 100%);
+}
+
+.quest-type-twitter_like_retweet .quest-type-icon,
+.quest-type-twitter_comment .quest-type-icon,
+.quest-type-twitter_combined_actions .quest-type-icon {
+  background: linear-gradient(135deg, var(--social-twitter-primary), var(--social-twitter-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
+}
+
+.quest-type-twitter_like_retweet:hover,
+.quest-type-twitter_comment:hover,
+.quest-type-twitter_combined_actions:hover {
+  box-shadow: 0 8px 25px rgba(29, 161, 242, 0.2);
+}
+
+/* Reddit Quests */
+.quest-type-reddit_post_creation,
+.quest-type-reddit_comment,
+.quest-type-reddit_upvote {
+  border-left: 4px solid var(--social-reddit-primary);
+  background: linear-gradient(135deg, 
+    rgba(255, 69, 0, 0.05) 0%, 
+    rgba(224, 61, 0, 0.02) 100%);
+}
+
+.quest-type-reddit_post_creation .quest-type-icon,
+.quest-type-reddit_comment .quest-type-icon,
+.quest-type-reddit_upvote .quest-type-icon {
+  background: linear-gradient(135deg, var(--social-reddit-primary), var(--social-reddit-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+}
+
+.quest-type-reddit_post_creation:hover,
+.quest-type-reddit_comment:hover,
+.quest-type-reddit_upvote:hover {
+  box-shadow: 0 8px 25px rgba(255, 69, 0, 0.2);
+}
+
+/* Discord Quests */
+.quest-type-discord_join {
+  border-left: 4px solid var(--social-discord-primary);
+  background: linear-gradient(135deg, 
+    rgba(88, 101, 242, 0.05) 0%, 
+    rgba(71, 82, 196, 0.02) 100%);
+}
+
+.quest-type-discord_join .quest-type-icon {
+  background: linear-gradient(135deg, var(--social-discord-primary), var(--social-discord-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+}
+
+.quest-type-discord_join:hover {
+  box-shadow: 0 8px 25px rgba(88, 101, 242, 0.2);
+}
+
+/* Telegram Quests */
+.quest-type-telegram_join {
+  border-left: 4px solid var(--social-telegram-primary);
+  background: linear-gradient(135deg, 
+    rgba(0, 136, 204, 0.05) 0%, 
+    rgba(0, 102, 153, 0.02) 100%);
+}
+
+.quest-type-telegram_join .quest-type-icon {
+  background: linear-gradient(135deg, var(--social-telegram-primary), var(--social-telegram-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+}
+
+.quest-type-telegram_join:hover {
+  box-shadow: 0 8px 25px rgba(0, 136, 204, 0.2);
+}
+
+/* =============== Engagement Quest Types =============== */
+
+/* Community Engagement */
+.quest-type-followers_gain,
+.quest-type-x_group_join,
+.quest-type-multi_platform_engagement {
+  border-left: 4px solid var(--engagement-community-primary);
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.05) 0%, 
+    rgba(124, 58, 237, 0.02) 100%);
+}
+
+.quest-type-followers_gain .quest-type-icon,
+.quest-type-x_group_join .quest-type-icon,
+.quest-type-multi_platform_engagement .quest-type-icon {
+  background: linear-gradient(135deg, var(--engagement-community-primary), var(--engagement-community-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.quest-type-followers_gain:hover,
+.quest-type-x_group_join:hover,
+.quest-type-multi_platform_engagement:hover {
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+}
+
+/* DexScreener Quests */
+.quest-type-dexscreener_rocket {
+  border-left: 4px solid var(--engagement-dex-primary);
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.05) 0%, 
+    rgba(5, 150, 105, 0.02) 100%);
+}
+
+.quest-type-dexscreener_rocket .quest-type-icon {
+  background: linear-gradient(135deg, var(--engagement-dex-primary), var(--engagement-dex-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.quest-type-dexscreener_rocket:hover {
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+}
+
+/* CoinMarketCap Quests */
+.quest-type-coinmarketcap_upvote {
+  border-left: 4px solid var(--engagement-cmc-primary);
+  background: linear-gradient(135deg, 
+    rgba(255, 184, 0, 0.05) 0%, 
+    rgba(230, 166, 0, 0.02) 100%);
+}
+
+.quest-type-coinmarketcap_upvote .quest-type-icon {
+  background: linear-gradient(135deg, var(--engagement-cmc-primary), var(--engagement-cmc-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 184, 0, 0.3);
+}
+
+.quest-type-coinmarketcap_upvote:hover {
+  box-shadow: 0 8px 25px rgba(255, 184, 0, 0.2);
+}
+
+/* =============== Web3/DeFi Quest Types =============== */
+
+/* Token Purchase Quests */
+.quest-type-token_purchase {
+  border-left: 4px solid var(--web3-token-primary);
+  background: linear-gradient(135deg, 
+    rgba(1, 229, 169, 0.05) 0%, 
+    rgba(0, 212, 170, 0.02) 100%);
+}
+
+.quest-type-token_purchase .quest-type-icon {
+  background: linear-gradient(135deg, var(--web3-token-primary), var(--web3-token-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(1, 229, 169, 0.3);
+}
+
+.quest-type-token_purchase:hover {
+  box-shadow: 0 8px 25px rgba(1, 229, 169, 0.2);
+}
+
+/* NFT Purchase Quests */
+.quest-type-nft_purchase {
+  border-left: 4px solid var(--web3-nft-primary);
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.05) 0%, 
+    rgba(217, 119, 6, 0.02) 100%);
+}
+
+.quest-type-nft_purchase .quest-type-icon {
+  background: linear-gradient(135deg, var(--web3-nft-primary), var(--web3-nft-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.quest-type-nft_purchase:hover {
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+}
+
+/* DeFi Quests */
+.quest-type-liquidity_provision,
+.quest-type-contract_interaction {
+  border-left: 4px solid var(--web3-defi-primary);
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.05) 0%, 
+    rgba(79, 70, 229, 0.02) 100%);
+}
+
+.quest-type-liquidity_provision .quest-type-icon,
+.quest-type-contract_interaction .quest-type-icon {
+  background: linear-gradient(135deg, var(--web3-defi-primary), var(--web3-defi-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.quest-type-liquidity_provision:hover,
+.quest-type-contract_interaction:hover {
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+}
+
+/* Staking Quests */
+.quest-type-staking_action {
+  border-left: 4px solid var(--web3-staking-primary);
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.05) 0%, 
+    rgba(124, 58, 237, 0.02) 100%);
+}
+
+.quest-type-staking_action .quest-type-icon {
+  background: linear-gradient(135deg, var(--web3-staking-primary), var(--web3-staking-secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.quest-type-staking_action:hover {
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+}
+
+/* =============== Difficulty Indicators =============== */
+
+.difficulty-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.difficulty-easy {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--difficulty-easy);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.difficulty-easy::before {
+  content: '●';
+  color: var(--difficulty-easy);
+}
+
+.difficulty-medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--difficulty-medium);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.difficulty-medium::before {
+  content: '●●';
+  color: var(--difficulty-medium);
+}
+
+.difficulty-hard {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--difficulty-hard);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.difficulty-hard::before {
+  content: '●●●';
+  color: var(--difficulty-hard);
+}
+
+.difficulty-expert {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--difficulty-expert);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.difficulty-expert::before {
+  content: '●●●●';
+  color: var(--difficulty-expert);
+}
+
+/* =============== Quest Type Icons =============== */
+
+.quest-type-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  font-size: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.quest-type-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.quest-type-icon:hover::before {
+  transform: translateX(100%);
+}
+
+.quest-type-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* =============== Platform-Specific Styling =============== */
+
+/* Twitter Platform Styling */
+.platform-twitter {
+  --platform-primary: var(--social-twitter-primary);
+  --platform-secondary: var(--social-twitter-secondary);
+}
+
+/* Reddit Platform Styling */
+.platform-reddit {
+  --platform-primary: var(--social-reddit-primary);
+  --platform-secondary: var(--social-reddit-secondary);
+}
+
+/* Discord Platform Styling */
+.platform-discord {
+  --platform-primary: var(--social-discord-primary);
+  --platform-secondary: var(--social-discord-secondary);
+}
+
+/* Telegram Platform Styling */
+.platform-telegram {
+  --platform-primary: var(--social-telegram-primary);
+  --platform-secondary: var(--social-telegram-secondary);
+}
+
+/* DeFi Platform Styling */
+.platform-defi {
+  --platform-primary: var(--web3-defi-primary);
+  --platform-secondary: var(--web3-defi-secondary);
+}
+
+/* =============== Category Badges =============== */
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.category-social {
+  background: rgba(29, 161, 242, 0.15);
+  color: var(--social-twitter-primary);
+  border-color: rgba(29, 161, 242, 0.3);
+}
+
+.category-engagement {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--engagement-community-primary);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.category-web3 {
+  background: rgba(1, 229, 169, 0.15);
+  color: var(--web3-token-primary);
+  border-color: rgba(1, 229, 169, 0.3);
+}
+
+.category-content {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--web3-nft-primary);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.category-custom {
+  background: rgba(107, 114, 128, 0.15);
+  color: #9CA3AF;
+  border-color: rgba(107, 114, 128, 0.3);
+}
+
+/* =============== Responsive Design =============== */
+
+@media (max-width: 768px) {
+  .quest-type-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
+  
+  .difficulty-indicator,
+  .category-badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .quest-type-icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+}
+
+/* =============== Animation Enhancements =============== */
+
+@keyframes quest-type-glow {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(var(--platform-primary), 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(var(--platform-primary), 0.5);
+  }
+}
+
+.quest-type-featured .quest-type-icon {
+  animation: quest-type-glow 2s ease-in-out infinite;
+}
+
+/* =============== Dark Mode Enhancements =============== */
+
+@media (prefers-color-scheme: dark) {
+  .quest-type-icon {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* =============== High Contrast Mode =============== */
+
+@media (prefers-contrast: high) {
+  .difficulty-indicator,
+  .category-badge,
+  .quest-type-icon {
+    border-width: 2px;
+  }
+}

@@ -1,0 +1,56 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow public uploads to specific paths for token staking
+    match /token-staking/logos/{imageId} {
+      allow read: if true;
+      allow write: if true; // Temporarily allow public writes
+    }
+    
+    match /token-staking/banners/{imageId} {
+      allow read: if true;
+      allow write: if true; // Temporarily allow public writes
+    }
+    // Public read access for token logos
+    match /token-logos/{logoId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                    (request.auth.token.admin == true);
+    }
+    
+    // Public read/write access for ALL NFT staking images
+    match /nft-staking/{allPaths=**} {
+      allow read: if true;  // Anyone can read
+      allow write: if request.auth != null;  // Any authenticated user can write
+    }
+    
+    // Additional token staking paths
+    match /token-staking/{type}/{imageId} {
+      allow read: if true;
+      allow write: if true; // Allow client uploads temporarily
+    }
+    
+    // Public read access for various staking contract images
+    match /lp-staking/{type}/{imageId} {
+      allow read: if true;
+      allow write: if false; // Only server-side uploads via API
+    }
+    
+    match /vault-staking/{type}/{imageId} {
+      allow read: if true;
+      allow write: if false; // Only server-side uploads via API
+    }
+    
+    // Quest proof images - public read
+    match /quest-proofs/{imageId} {
+      allow read: if true;
+      allow write: if false; // Only server-side uploads via API
+    }
+    
+    // All other files require admin access
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null && 
+                          (request.auth.token.admin == true);
+    }
+  }
+}

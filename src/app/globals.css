@@ -1,0 +1,346 @@
+/* Import custom component styles */
+@import '../styles/components/GlassmorphicUI.css';
+@import '../styles/components/QuestDetails.css';
+@import '../styles/components/CryptoStyles.css';
+@import '../styles/components/EnhancedQuestSystem.css';
+@import '../styles/components/EnhancedQuestWizard.css';
+@import '../styles/components/AchievementSystem.css';
+@import '../styles/components/CelebrationEffects.css';
+@import '../styles/components/Slider.module.css';
+@import '../styles/fix-scroll.css';
+@import '../styles/swap.css';
+
+/* Import Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar hiding utilities */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, Opera */
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, Opera */
+  }
+}
+
+/* Custom styles that extend Tailwind */
+@layer base {
+  html, body {
+    @apply text-white font-sans antialiased;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #060b23; /* Fallback solid color */
+    background: radial-gradient(ellipse at top left, rgba(0, 40, 130, 0.25), transparent 50%),
+                radial-gradient(ellipse at top right, rgba(0, 194, 255, 0.15), transparent 45%),
+                radial-gradient(ellipse at bottom, rgba(0, 15, 50, 0.95), transparent 70%),
+                linear-gradient(180deg, #000911 0%, #001429 50%, #000711 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
+  }
+  
+  /* Ensure root element covers full viewport */
+  #root, #__next, body > div:first-child {
+    min-height: 100vh;
+    background-color: #060b23; /* Match body background */
+  }
+  
+  /* Typography scale */
+  h1 {
+    @apply text-4xl md:text-5xl font-bold tracking-tight leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold tracking-tight leading-tight;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight leading-tight;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl font-medium tracking-tight;
+  }
+  
+  h5 {
+    @apply text-lg md:text-xl font-medium;
+  }
+  
+  h6 {
+    @apply text-base md:text-lg font-medium;
+  }
+  
+  p {
+    @apply text-base leading-relaxed text-white/80;
+  }
+  
+  /* Improved readability for body text */
+  .body-text {
+    @apply text-base leading-relaxed text-white/80 max-w-prose;
+  }
+  
+  /* Code blocks */
+  code {
+    @apply bg-white/5 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+  
+  pre {
+    @apply bg-white/5 p-4 rounded-lg overflow-x-auto;
+  }
+  
+  /* Lists */
+  ul, ol {
+    @apply space-y-2 text-white/80;
+  }
+  
+  li {
+    @apply leading-relaxed;
+  }
+  
+  /* Add subtle noise texture to background */
+  body::before {
+    content: '';
+    @apply fixed top-0 left-0 w-full h-full pointer-events-none opacity-[0.02] -z-10;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-[6px] h-[6px];
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-black/10 rounded-[10px];
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-[10px];
+    background-color: rgba(18, 108, 254, 0.5);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(18, 108, 254, 0.7);
+  }
+
+  /* Shimmer animation for banner */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s infinite;
+  }
+
+  /* Global transition defaults */
+  * {
+    @apply transition-colors duration-200 ease-out;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Focus states */
+  :focus-visible {
+    @apply outline-none ring-2 ring-[#0072ff] ring-offset-2 ring-offset-background;
+  }
+  
+  /* Selection styles */
+  ::selection {
+    @apply bg-[#0072ff]/30 text-white;
+  }
+  
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    html, body {
+      @apply text-[15px];
+    }
+    
+    /* Set CSS variable for viewport height */
+    :root {
+      --vh: 1vh;
+    }
+  }
+}
+
+@layer components {
+  /* Custom gradients for crypto app branding */
+  .roo-gradient-bg {
+    @apply bg-gradient-to-br from-background to-secondary-dark;
+  }
+  
+  .crypto-card-gradient {
+    background: linear-gradient(135deg, rgba(10, 15, 35, 0.95) 0%, rgba(15, 20, 40, 0.85) 100%);
+  }
+  
+  .primary-gradient {
+    @apply bg-gradient-to-br from-[#0072ff] to-[#0056cc];
+  }
+  
+  .accent-gradient {
+    @apply bg-gradient-to-br from-[#00ffcc] to-[#00c2ff];
+  }
+  
+  .roo-gradient-border {
+    @apply relative;
+  }
+  
+  .roo-gradient-border::before {
+    content: '';
+    @apply absolute -inset-[1px] bg-gradient-to-br from-primary to-accent rounded-inherit -z-10 opacity-70;
+  }
+  
+  /* Text gradients */
+  .gradient-text {
+    @apply inline-block bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+  
+  .accent-gradient-text {
+    @apply inline-block bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary;
+  }
+  
+  .text-gradient-orange {
+    @apply inline-block bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500;
+  }
+  
+  /* Custom animations for homepage */
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(50px);
+    }
+  }
+
+  @keyframes glitch-1 {
+    0%, 100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes glitch-2 {
+    0%, 100% {
+      transform: translateX(100%);
+    }
+    50% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Responsive container for main content */
+  .page-container {
+    @apply p-4 max-w-[1200px] mx-auto relative;
+  }
+  
+  @media (min-width: 768px) {
+    .page-container {
+      @apply p-8;
+    }
+  }
+}
+
+@layer utilities {
+  /* Support for Web3Modal styling */
+  .web3modal-modal {
+    @apply z-[999999] !important;
+  }
+  
+  /* Ensure modal appears above everything else */
+  div[role="dialog"],
+  div[aria-modal="true"] {
+    @apply z-[999999] !important;
+  }
+  
+  body[data-appkit-active="true"] {
+    @apply overflow-hidden;
+  }
+  
+  /* Micro-interactions */
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 ease-out hover:scale-105;
+  }
+  
+  .hover-glow {
+    @apply transition-shadow duration-300 ease-out hover:shadow-lg hover:shadow-[#0072ff]/20;
+  }
+  
+  .press-scale {
+    @apply transition-transform duration-150 ease-out active:scale-95;
+  }
+  
+  /* Smooth fade animations */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Smooth transitions for all interactive elements */
+  a, button, input, textarea, select {
+    @apply transition-all duration-200 ease-out;
+  }
+  
+  /* Enhanced link hover effect */
+  a:not(.no-hover-effect) {
+    @apply relative;
+  }
+  
+  a:not(.no-hover-effect)::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-[1px] bg-current transition-all duration-300 ease-out;
+  }
+  
+  a:not(.no-hover-effect):hover::after {
+    @apply w-full;
+  }
+  
+  /* Loading animation */
+  .loading-pulse {
+    @apply animate-pulse;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.05) 0%, 
+      rgba(255, 255, 255, 0.1) 50%, 
+      rgba(255, 255, 255, 0.05) 100%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+  }
+  
+  @keyframes loading-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}

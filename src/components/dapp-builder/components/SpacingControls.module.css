@@ -1,0 +1,44 @@
+.spacingControls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.spacingGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.spacingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spacingRow label {
+  font-size: 12px;
+  color: #6b7280;
+  min-width: 50px;
+}
+
+.spacingRow input {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+
+.spacingRow input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}

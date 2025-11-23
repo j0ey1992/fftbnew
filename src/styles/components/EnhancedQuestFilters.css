@@ -1,0 +1,596 @@
+/* Enhanced Quest Filters Styling */
+
+/* =============== Filter Container =============== */
+
+.enhanced-quest-filters {
+  background: rgba(10, 30, 61, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.enhanced-quest-filters:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 15px 35px -5px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+/* =============== Filter Header =============== */
+
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.filters-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.filters-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.active-filters-count {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(55, 114, 255, 0.15);
+  color: #3772FF;
+  border: 1px solid rgba(55, 114, 255, 0.3);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(55, 114, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(55, 114, 255, 0.6);
+  }
+}
+
+.filters-toggle-button {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filters-toggle-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+.filters-clear-button {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  border-radius: 0.375rem;
+  background: rgba(255, 71, 87, 0.1);
+  color: #FF4757;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filters-clear-button:hover {
+  background: rgba(255, 71, 87, 0.2);
+  border-color: rgba(255, 71, 87, 0.5);
+  transform: translateY(-1px);
+}
+
+/* =============== Basic Filters Grid =============== */
+
+.basic-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3772FF;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(55, 114, 255, 0.1);
+}
+
+.filter-select:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.filter-select option {
+  background: rgba(10, 30, 61, 0.95);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem;
+}
+
+/* =============== Enhanced Filters Section =============== */
+
+.enhanced-filters-section {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  animation: expandDown 0.3s ease-out;
+}
+
+@keyframes expandDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+.enhanced-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* =============== Feature Filters =============== */
+
+.feature-filters-section {
+  margin-bottom: 1.5rem;
+}
+
+.feature-filters-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.75rem;
+}
+
+.feature-filters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.feature-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-filter-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: left 0.5s ease;
+}
+
+.feature-filter-item:hover::before {
+  left: 100%;
+}
+
+.feature-filter-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.feature-filter-item.checked {
+  background: rgba(55, 114, 255, 0.1);
+  border-color: #3772FF;
+  color: #3772FF;
+}
+
+.feature-filter-checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #3772FF;
+  cursor: pointer;
+}
+
+.feature-filter-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* =============== Completion Time Filter =============== */
+
+.completion-time-filter {
+  margin-bottom: 1.5rem;
+}
+
+.completion-time-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.completion-time-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.completion-time-input:focus {
+  outline: none;
+  border-color: #3772FF;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(55, 114, 255, 0.1);
+}
+
+.completion-time-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* =============== Active Filters Display =============== */
+
+.active-filters-display {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.active-filters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.active-filter-tag:hover {
+  transform: translateY(-1px) scale(1.05);
+}
+
+/* Active Filter Tag Variants */
+.active-filter-tag-category {
+  background: rgba(55, 114, 255, 0.15);
+  color: #3772FF;
+  border-color: rgba(55, 114, 255, 0.3);
+}
+
+.active-filter-tag-difficulty {
+  background: rgba(255, 184, 0, 0.15);
+  color: #FFB800;
+  border-color: rgba(255, 184, 0, 0.3);
+}
+
+.active-filter-tag-type {
+  background: rgba(106, 41, 237, 0.15);
+  color: #A855F7;
+  border-color: rgba(106, 41, 237, 0.3);
+}
+
+.active-filter-tag-ai {
+  background: rgba(1, 229, 169, 0.15);
+  color: #01E5A9;
+  border-color: rgba(1, 229, 169, 0.3);
+}
+
+.active-filter-tag-cronos {
+  background: rgba(255, 158, 11, 0.15);
+  color: #FF9E0B;
+  border-color: rgba(255, 158, 11, 0.3);
+}
+
+.active-filter-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: currentColor;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.active-filter-remove:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* =============== Filter Statistics =============== */
+
+.filter-statistics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 1rem;
+}
+
+.filter-stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.filter-stats-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #3772FF;
+}
+
+.filter-stats-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+/* =============== Loading States =============== */
+
+.filters-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.filters-loading-spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top: 2px solid #3772FF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =============== Responsive Design =============== */
+
+@media (max-width: 768px) {
+  .enhanced-quest-filters {
+    padding: 1rem;
+  }
+  
+  .filters-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .filters-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .basic-filters-grid,
+  .enhanced-filters-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-filters-grid {
+    flex-direction: column;
+  }
+  
+  .completion-time-inputs {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-statistics {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .filters-title {
+    font-size: 1rem;
+  }
+  
+  .filter-select,
+  .completion-time-input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+  
+  .feature-filter-item {
+    padding: 0.625rem 0.875rem;
+  }
+  
+  .active-filter-tag {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .active-filters-list {
+    gap: 0.375rem;
+  }
+}
+
+/* =============== Sticky Filters =============== */
+
+.enhanced-quest-filters.sticky {
+  position: sticky;
+  top: 1rem;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+.enhanced-quest-filters.sticky::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  z-index: -1;
+  background: rgba(10, 15, 31, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* =============== High Contrast Mode =============== */
+
+@media (prefers-contrast: high) {
+  .filter-select,
+  .completion-time-input,
+  .feature-filter-item,
+  .active-filter-tag {
+    border-width: 2px;
+  }
+}
+
+/* =============== Reduced Motion =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  .active-filters-count,
+  .filters-loading-spinner {
+    animation: none;
+  }
+  
+  .enhanced-filters-section,
+  .active-filters-display,
+  .active-filter-tag {
+    animation: none;
+  }
+  
+  .feature-filter-item:hover,
+  .filters-toggle-button:hover,
+  .active-filter-tag:hover {
+    transform: none;
+  }
+}
+
+/* =============== Print Styles =============== */
+
+@media print {
+  .enhanced-quest-filters {
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .filters-toggle-button,
+  .filters-clear-button,
+  .active-filter-remove {
+    display: none;
+  }
+}

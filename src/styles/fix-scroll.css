@@ -1,0 +1,48 @@
+/* Fix for scroll bleed issues */
+
+/* Ensure the app container takes up the full viewport */
+#__next, #root, body > div:first-child {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #060b23; /* Ensure background color */
+}
+
+/* Fix for iOS Safari and other mobile browsers */
+@supports (-webkit-touch-callout: none) {
+  html, 
+  body {
+    min-height: -webkit-fill-available;
+  }
+  
+  #__next, #root, body > div:first-child {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Fix for fixed elements with transforms */
+.fixed-element {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Fix for mobile viewport height issues */
+@media (max-width: 768px) {
+  :root {
+    --vh: 1vh;
+  }
+  
+  .use-vh {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+/* Prevent content from being hidden under fixed headers */
+.header-offset {
+  padding-top: var(--header-height, 80px);
+}
+
+/* Prevent content from being hidden under fixed bottom navigation */
+.bottom-nav-offset {
+  padding-bottom: var(--bottom-nav-height, 65px);
+}

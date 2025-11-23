@@ -1,0 +1,117 @@
+/* Swap Interface Styles */
+:root {
+  --swap-primary-color: #0A1228;
+  --swap-secondary-color: #1E293B;
+  --swap-accent-color: #38BDF8;
+  --swap-text-primary: #F8FAFC;
+  --swap-text-secondary: #94A3B8;
+  --swap-border-color: rgba(56, 189, 248, 0.2);
+  --swap-button-bg: rgba(50, 66, 90, 0.7);
+  --swap-button-hover: rgba(71, 85, 105, 0.7);
+  --swap-input-bg: rgba(10, 18, 40, 0.5);
+}
+
+.swap-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.swap-glassmorphism {
+  background: var(--swap-secondary-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--swap-border-color);
+}
+
+.swap-btn-percent {
+  background-color: var(--swap-button-bg);
+  color: var(--swap-text-secondary);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.swap-btn-percent:hover {
+  background-color: var(--swap-button-hover);
+  border-color: var(--swap-accent-color);
+  color: var(--swap-accent-color);
+}
+
+.swap-btn-percent.active {
+  background-color: var(--swap-accent-color);
+  color: var(--swap-primary-color);
+  font-weight: 600;
+}
+
+.swap-crypto-select {
+  background-color: var(--swap-primary-color);
+  border: 1px solid var(--swap-border-color);
+  transition: all 0.2s ease;
+}
+
+.swap-crypto-select:hover {
+  border-color: var(--swap-accent-color);
+}
+
+.swap-icon-container {
+  background-color: var(--swap-primary-color);
+  border: 1px solid var(--swap-accent-color);
+  color: var(--swap-accent-color);
+  transition: all 0.3s ease;
+}
+
+.swap-icon-container:hover {
+  background-color: var(--swap-accent-color);
+  color: var(--swap-primary-color);
+  transform: rotate(180deg);
+}
+
+.swap-input-bg {
+  background-color: var(--swap-input-bg);
+}
+
+.swap-soon-badge {
+  background-color: var(--swap-accent-color);
+  color: var(--swap-primary-color);
+}
+
+.swap-leverage-badge {
+  background-color: #FACC15;
+  color: #1E293B;
+}
+
+.swap-submit-button {
+  background-color: rgba(71, 85, 105, 0.5);
+  color: var(--swap-text-secondary);
+  transition: all 0.3s ease;
+}
+
+.swap-submit-button:hover:not(:disabled) {
+  background-color: var(--swap-accent-color);
+  color: var(--swap-primary-color);
+}
+
+.swap-submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Scrollbar styling for token lists */
+.swap-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.swap-scrollbar::-webkit-scrollbar-track {
+  background: var(--swap-secondary-color);
+  border-radius: 10px;
+}
+
+.swap-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--swap-accent-color);
+  border-radius: 10px;
+}
+
+.swap-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #60A5FA;
+}
+
+/* Material Icons */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');

@@ -1,0 +1,540 @@
+/* Preview Component Renderer Styles */
+
+.componentPreview {
+  position: relative;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+}
+
+.componentPreview:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+.componentPreview.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Component Label */
+.componentLabel {
+  position: absolute;
+  top: -12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: #3b82f6;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.labelIcon {
+  font-size: 1rem;
+}
+
+/* Category-specific colors */
+.componentPreview.staking .componentLabel {
+  background: #8b5cf6;
+}
+
+.componentPreview.defi .componentLabel {
+  background: #10b981;
+}
+
+.componentPreview.gaming .componentLabel {
+  background: #f59e0b;
+}
+
+.componentPreview.user .componentLabel {
+  background: #6366f1;
+}
+
+/* Component Content */
+.componentContent {
+  position: relative;
+  z-index: 0;
+}
+
+/* Config Indicator */
+.configIndicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 0.125rem 0.5rem;
+  background: #10b981;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Unknown Component */
+.unknownComponent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  color: #94a3b8;
+}
+
+.unknownComponent .icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Generic Component */
+.genericComponent {
+  text-align: center;
+  padding: 1rem;
+}
+
+.componentIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.genericComponent h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.genericComponent p {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* NFT Staking */
+.nftStaking {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nftGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.nftCard {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nftCard::after {
+  content: '';
+  position: absolute;
+  inset: 20%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.stakingInfo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.statBox {
+  flex: 1;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.statBox span {
+  display: block;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.statBox strong {
+  display: block;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+/* Staking Pool */
+.stakingPool {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.poolHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tokenPair {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tokenIcon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  border-radius: 50%;
+}
+
+.apr {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #10b981;
+}
+
+.poolStats {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.stat {
+  flex: 1;
+  padding: 0.5rem;
+  background: #f8fafc;
+  border-radius: 6px;
+}
+
+.stat span {
+  display: block;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.stat strong {
+  display: block;
+  font-size: 0.875rem;
+  color: #1e293b;
+  margin-top: 0.125rem;
+}
+
+/* Vault */
+.vault {
+  text-align: center;
+}
+
+.vaultHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.vaultIcon {
+  font-size: 2.5rem;
+}
+
+.vaultHeader h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.vaultInfo {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.infoRow span {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.infoRow strong {
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+/* Swap Interface */
+.swapInterface {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.swapBox {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.swapBox label {
+  display: block;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.tokenInput {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tokenInput input {
+  flex: 1;
+  padding: 0.5rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.tokenSelect {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.swapArrow {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #64748b;
+}
+
+/* Quest Discovery */
+.questGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.questCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.questIcon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.questCard h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.questCard p {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.xpBadge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: #fbbf24;
+  color: #78350f;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+/* Leaderboard */
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.leaderboardItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.rank {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3b82f6;
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.username {
+  flex: 1;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.score {
+  font-weight: 600;
+  color: #6366f1;
+}
+
+/* Connect Wallet */
+.connectWallet {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.walletButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #3b82f6;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.walletButton:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.walletIcon {
+  font-size: 1.25rem;
+}
+
+/* Token Balance */
+.tokenBalance {
+  padding: 0.5rem;
+}
+
+.balanceCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.balanceInfo {
+  flex: 1;
+}
+
+.balanceInfo span {
+  display: block;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.balanceInfo strong {
+  display: block;
+  font-size: 1.25rem;
+  color: #1e293b;
+}
+
+/* Buttons */
+.button,
+.buttonSecondary,
+.buttonPrimary {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.button {
+  background: #3b82f6;
+  color: white;
+}
+
+.button:hover {
+  background: #2563eb;
+}
+
+.buttonSecondary {
+  background: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.buttonSecondary:hover {
+  background: #eff6ff;
+}
+
+.buttonPrimary {
+  width: 100%;
+  background: #3b82f6;
+  color: white;
+  padding: 0.75rem;
+}
+
+.buttonPrimary:hover {
+  background: #2563eb;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionButtons button {
+  flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nftGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .questGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .poolStats,
+  .stakingInfo {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,76 @@
+/* Faq.module.css */
+.faqContainer {
+  margin: 1.5rem 0;
+}
+
+.faqHeader {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.faqItem {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(20, 23, 43, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.faqItem:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.faqQuestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.questionText {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.icon {
+  flex-shrink: 0;
+  transition: transform 0.3s;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.iconOpen {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faqAnswerOpen {
+  padding: 0 1rem 1rem;
+  max-height: 1000px;
+}
+
+.answerText {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+/* Divider between question and answer */
+.faqDivider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(31, 113, 254, 0.1), rgba(255, 255, 255, 0.05));
+  margin: 0 1rem;
+}

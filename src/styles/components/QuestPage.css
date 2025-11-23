@@ -1,0 +1,422 @@
+/* Modern Crypto.com Style Quest Page - 2025 Edition */
+
+/* =============== Background Effects =============== */
+
+/* Animated background */
+.animated-bg {
+  background: linear-gradient(-45deg, #041836, #0c2347, #0f2952, #041836);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Ambient background gradients */
+.ambient-gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(31, 113, 254, 0.15),
+    transparent 70%
+  );
+  z-index: 0;
+}
+
+.ambient-gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: radial-gradient(
+    ellipse at bottom,
+    rgba(106, 41, 237, 0.1),
+    transparent 70%
+  );
+  z-index: 0;
+}
+
+.noise-texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=");
+  z-index: 1;
+}
+
+/* =============== Text Effects =============== */
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(to right, #3772FF, #44C4FF);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  animation: textShimmer 4s ease-in-out infinite alternate;
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-text-premium {
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  animation: textShimmer 4s ease-in-out infinite alternate;
+}
+
+/* Text glow effect */
+.text-glow {
+  text-shadow: 0 0 10px rgba(55, 114, 255, 0.7), 
+               0 0 20px rgba(55, 114, 255, 0.5), 
+               0 0 30px rgba(55, 114, 255, 0.3);
+}
+
+.text-glow-premium {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 
+               0 0 20px rgba(255, 215, 0, 0.5), 
+               0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+/* =============== Card Effects =============== */
+
+/* Blue glow effect */
+.blue-glow {
+  box-shadow: 0 0 15px rgba(55, 114, 255, 0.5), 
+              0 0 30px rgba(55, 114, 255, 0.3);
+}
+
+/* Premium card border */
+.premium-border {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.premium-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, #3772FF, #44C4FF, #6A29ED);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Crypto.com inspired card */
+.crypto-card {
+  background: rgba(10, 30, 61, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.crypto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 15px 35px -5px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(55, 114, 255, 0.2);
+}
+
+/* Card hover effects */
+.quest-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quest-card-hover:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 
+    0 15px 35px -5px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(55, 114, 255, 0.3);
+}
+
+/* =============== Button Styles =============== */
+
+/* Crypto.com inspired button */
+.crypto-button {
+  background: linear-gradient(to right, #3772FF, #44C4FF);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(55, 114, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.crypto-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(55, 114, 255, 0.4);
+}
+
+.crypto-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(55, 114, 255, 0.3);
+}
+
+/* Button shine effect */
+.crypto-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.crypto-button:hover::after {
+  animation: shine 1.5s ease;
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) rotate(45deg);
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* =============== Badge Styles =============== */
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+}
+
+.badge-primary {
+  background-color: rgba(55, 114, 255, 0.15);
+  color: #3772FF;
+  border: 1px solid rgba(55, 114, 255, 0.3);
+}
+
+.badge-success {
+  background-color: rgba(1, 229, 169, 0.15);
+  color: #01E5A9;
+  border: 1px solid rgba(1, 229, 169, 0.3);
+}
+
+.badge-warning {
+  background-color: rgba(255, 184, 0, 0.15);
+  color: #FFB800;
+  border: 1px solid rgba(255, 184, 0, 0.3);
+}
+
+.badge-danger {
+  background-color: rgba(255, 71, 87, 0.15);
+  color: #FF4757;
+  border: 1px solid rgba(255, 71, 87, 0.3);
+}
+
+/* =============== Animation Utilities =============== */
+
+/* Fade in animation */
+.animate-fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in up animation */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale in animation */
+.animate-scale-in {
+  animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulse animation */
+.animate-pulse-subtle {
+  animation: pulseSlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseSlow {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+/* =============== Utility Classes =============== */
+
+/* Hide scrollbars for a cleaner look */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
+
+/* Glass panel */
+.glass-panel-dark {
+  background: rgba(10, 15, 31, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+}
+
+/* Sticky Filters Component */
+.sticky-filters {
+  position: sticky;
+  top: 1rem;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+.sticky-filters::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  z-index: -1;
+  background: rgba(10, 15, 31, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .crypto-button {
+    padding: 0.6rem 1.2rem;
+  }
+}

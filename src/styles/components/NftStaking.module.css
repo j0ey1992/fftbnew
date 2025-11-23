@@ -1,0 +1,854 @@
+/* NFT Staking specific styles */
+
+/* Common container */
+.nftStakingContainer {
+  background-color: var(--deep-blue);
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.nftStakingContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(8, 42, 97, 0.3), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(6, 20, 50, 0.2), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Collection card styles */
+.collectionCard {
+  background-color: rgba(10, 31, 61, 0.7);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(24, 48, 96, 0.3);
+  transition: all 0.3s ease;
+}
+
+.collectionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  border-color: rgba(38, 84, 171, 0.4);
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+.cardImage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(1, 20, 42, 0.7));
+  z-index: 1;
+}
+
+.profilePicture {
+  position: absolute;
+  bottom: -20px;
+  left: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #0c2347;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.aprBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: rgba(18, 108, 254, 0.8);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.cardContent {
+  padding: 1.25rem;
+  padding-top: 1.75rem;
+}
+
+.collectionTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.collectionDescription {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.collectionStats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statGroup {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.statValue {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.stakeButton {
+  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.stakeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(18, 108, 254, 0.3);
+}
+
+/* Filter tabs */
+.filterTabs {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.filterTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.filterTab {
+  flex-shrink: 0;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border: 1px solid;
+}
+
+.tabActive {
+  background-color: rgba(10, 30, 61, 1);
+  color: white;
+  border-color: rgba(18, 108, 254, 0.7);
+}
+
+.tabInactive {
+  background-color: transparent;
+  color: rgba(156, 163, 180, 1);
+  border-color: rgba(38, 63, 99, 0.5);
+}
+
+.tabInactive:hover {
+  background-color: rgba(10, 30, 61, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Featured collection card */
+.featuredCard {
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: rgba(10, 30, 61, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  width: 280px;
+  border: 1px solid rgba(24, 48, 96, 0.3);
+  transition: all 0.3s ease;
+}
+
+.featuredCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(38, 84, 171, 0.4);
+}
+
+.featuredImage {
+  position: relative;
+  height: 140px;
+  width: 100%;
+}
+
+.featuredImage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(4, 24, 54, 0.9));
+  z-index: 1;
+}
+
+.featuredContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.75rem;
+  z-index: 2;
+}
+
+.featuredTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.featuredApr {
+  font-size: 0.75rem;
+  color: #0ccd92;
+}
+
+.featuredDescription {
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Collection list item */
+.collectionListItem {
+  display: block;
+  background-color: rgba(10, 30, 61, 1);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(24, 48, 96, 0.3);
+}
+
+.collectionListItem:hover {
+  background-color: rgba(12, 35, 71, 1);
+}
+
+.listItemContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.collectionInfo {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.collectionAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #1f2937;
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+  border: 1px solid rgba(55, 88, 144, 0.3);
+}
+
+.collectionDetails {
+  min-width: 0;
+}
+
+.collectionHeader {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.listItemTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.newBadge {
+  background-color: rgba(18, 108, 254, 0.2);
+  color: #3e8aff;
+  font-size: 0.625rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(18, 108, 254, 0.3);
+}
+
+.listItemDescription {
+  font-size: 0.875rem;
+  color: rgba(156, 163, 180, 1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+@media (min-width: 640px) {
+  .listItemDescription {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 768px) {
+  .listItemDescription {
+    max-width: none;
+  }
+}
+
+.statTags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.statTag {
+  background-color: rgba(31, 41, 55, 1);
+  color: rgba(209, 213, 219, 1);
+  font-size: 0.625rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.aprDisplay {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  margin-right: 0.5rem;
+}
+
+.aprValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0ccd92;
+  white-space: nowrap;
+}
+
+.aprLabel {
+  font-size: 0.625rem;
+  color: rgba(156, 163, 180, 1);
+}
+
+.chevron {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgba(156, 163, 180, 1);
+  margin-left: 0.5rem;
+}
+
+/* Info section */
+.infoSection {
+  background-color: rgba(10, 30, 61, 1);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(24, 48, 96, 0.3);
+}
+
+.infoTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.infoText {
+  font-size: 0.875rem;
+  color: rgba(209, 213, 219, 1);
+  margin-bottom: 1rem;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+}
+
+.featureIcon {
+  background-color: rgba(18, 108, 254, 0.2);
+  padding: 0.5rem;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.featureIconSvg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #3e8aff;
+}
+
+.featureContent {
+  flex: 1;
+}
+
+.featureTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.125rem;
+}
+
+.featureDescription {
+  font-size: 0.75rem;
+  color: rgba(156, 163, 180, 1);
+}
+
+/* Section headers */
+.sectionHeader {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .cardImage {
+    height: 180px;
+  }
+  
+  .profilePicture {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .collectionTitle {
+    font-size: 1.25rem;
+  }
+  
+  .sectionHeader {
+    font-size: 1.5rem;
+  }
+}
+
+/* Collection Detail Page Styles */
+.collectionBanner {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(24, 48, 96, 0.3);
+  background-color: rgba(10, 31, 61, 0.7);
+}
+
+.bannerImage {
+  position: relative;
+  width: 100%;
+  height: 150px;
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10, 31, 61, 0.3), rgba(10, 31, 61, 0.9));
+  z-index: 1;
+}
+
+.bannerContent {
+  position: relative;
+  z-index: 2;
+  padding: 0 1rem 1rem;
+}
+
+.bannerProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -40px;
+}
+
+.profileImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #0c2347;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.75rem;
+  object-fit: cover;
+}
+
+.bannerTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.bannerDescription {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  max-width: 600px;
+}
+
+.bannerStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  background-color: rgba(10, 31, 61, 0.7);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .bannerImage {
+    height: 200px;
+  }
+  
+  .bannerStats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statLabel {
+  color: rgba(156, 163, 180, 1);
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.statValue {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Staking Info Card */
+.stakingInfoCard {
+  background-color: rgba(10, 31, 61, 0.7);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(24, 48, 96, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.sectionSubtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoLabel {
+  color: rgba(156, 163, 180, 1);
+  font-size: 0.875rem;
+}
+
+.infoValue {
+  color: white;
+  font-weight: 500;
+}
+
+.aprValue {
+  color: #0ccd92;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.rewardValue {
+  color: #0ccd92;
+  font-weight: 600;
+}
+
+/* Staking Action Card */
+.stakingActionCard {
+  background-color: rgba(10, 31, 61, 0.7);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(24, 48, 96, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.timerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.timerBlock {
+  background-color: rgba(13, 40, 80, 0.7);
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  border: 1px solid rgba(38, 84, 171, 0.2);
+}
+
+.timerDigit {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.timerLabel {
+  font-size: 0.625rem;
+  color: rgba(156, 163, 180, 1);
+  margin-top: 0.25rem;
+}
+
+.actionButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.stakeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 6px rgba(18, 108, 254, 0.2);
+}
+
+.stakeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(18, 108, 254, 0.3);
+}
+
+.unstakeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(to right, #f97316, #d97706);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 6px rgba(249, 115, 22, 0.2);
+}
+
+.unstakeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+}
+
+.claimButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  background: linear-gradient(to right, #10b981, #059669);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+}
+
+.claimButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.buttonDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Smaller action buttons */
+.stakeButtonSmall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(18, 108, 254, 0.2);
+  width: auto;
+  min-width: 110px;
+}
+
+.stakeButtonSmall:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(18, 108, 254, 0.3);
+}
+
+.unstakeButtonSmall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(to right, #f97316, #d97706);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(249, 115, 22, 0.2);
+  width: auto;
+  min-width: 110px;
+}
+
+.unstakeButtonSmall:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(249, 115, 22, 0.3);
+}
+
+.claimButtonSmall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(to right, #10b981, #059669);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+  width: auto;
+  min-width: 140px;
+}
+
+.claimButtonSmall:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(16, 185, 129, 0.3);
+}
+
+/* Period selector */
+.periodSelector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  background-color: rgba(13, 40, 80, 0.5);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.periodOption {
+  padding: 0.75rem 0;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: all 0.15s ease;
+  color: rgba(156, 163, 180, 1);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.periodOptionActive {
+  background-color: rgba(18, 108, 254, 0.8);
+  color: white;
+  box-shadow: 0 2px 8px rgba(18, 108, 254, 0.3);
+}
+
+/* NFT Tabs and Grid */
+.nftTabs {
+  display: flex;
+  border-bottom: 1px solid rgba(55, 65, 81, 1);
+  margin-bottom: 1rem;
+}
+
+.nftTab {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(156, 163, 180, 1);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nftTab:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nftTabActive {
+  color: white;
+  border-bottom-color: var(--primary);
+}
+
+.nftGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .nftGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .nftGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

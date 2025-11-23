@@ -1,0 +1,333 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Function to check if the user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Function to check if the user has admin claim
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+    
+    // Function to validate VVS pair data
+    function isValidVVSPair(data) {
+      // Check required fields
+      return data.size() >= 8
+        && 'name' in data && data.name is string && data.name.size() > 0
+        && 'symbol' in data && data.symbol is string && data.symbol.size() > 0
+        && 'logo' in data && data.logo is string && data.logo.size() > 0
+        && 'address' in data && data.address is string && data.address.size() > 0
+        && 'decimals' in data && data.decimals is number && data.decimals >= 0 && data.decimals <= 18
+        && 'enabled' in data && data.enabled is bool
+        && 'chainId' in data && data.chainId is number && data.chainId > 0
+        && 'isNative' in data && data.isNative is bool;
+    }
+    
+    // Function to validate staking contract data
+    function isValidStakingContract(data) {
+      // Check required fields
+      return data.size() >= 10
+        && 'name' in data && data.name is string && data.name.size() > 0
+        && 'description' in data && data.description is string && data.description.size() > 0
+        && 'contractAddress' in data && data.contractAddress is string && data.contractAddress.size() > 0
+        && 'tokenAddress' in data && data.tokenAddress is string && data.tokenAddress.size() > 0
+        && 'rewardTokenAddress' in data && data.rewardTokenAddress is string && data.rewardTokenAddress.size() > 0
+        && 'apr' in data && data.apr is string && data.apr.size() > 0
+        && 'minStake' in data && data.minStake is string && data.minStake.size() > 0
+        && 'enabled' in data && data.enabled is bool
+        && 'chainId' in data && data.chainId is number && data.chainId > 0
+        && 'lockPeriods' in data && data.lockPeriods is list
+        // Optional fields
+        && (!('logoUrl' in data) || (data.logoUrl is string))
+        && (!('socialLinks' in data) || (data.socialLinks is map && (
+          !('twitter' in data.socialLinks) || data.socialLinks.twitter is string) && 
+          (!('facebook' in data.socialLinks) || data.socialLinks.facebook is string) && 
+          (!('website' in data.socialLinks) || data.socialLinks.website is string) && 
+          (!('whereToBuy' in data.socialLinks) || data.socialLinks.whereToBuy is string) && 
+          (!('discord' in data.socialLinks) || data.socialLinks.discord is string) && 
+          (!('telegram' in data.socialLinks) || data.socialLinks.telegram is string)
+        ));
+    }
+    
+    // Function to validate NFT staking contract data
+    function isValidNftStakingContract(data) {
+      // Check required fields
+      return data.size() >= 8
+        && 'name' in data && data.name is string && data.name.size() > 0
+        && 'description' in data && data.description is string && data.description.size() > 0
+        && 'contractAddress' in data && data.contractAddress is string && data.contractAddress.size() > 0
+        && 'rewardTokenAddress' in data && data.rewardTokenAddress is string && data.rewardTokenAddress.size() > 0
+        && 'apr' in data && data.apr is string && data.apr.size() > 0
+        && 'minStake' in data && data.minStake is string && data.minStake.size() > 0
+        && 'enabled' in data && data.enabled is bool
+        && 'chainId' in data && data.chainId is number && data.chainId > 0
+        && 'collections' in data && data.collections is list
+        && 'abi' in data && data.abi is list;
+    }
+    
+    // VVS pairs collection rules
+    match /vvs-pairs/{pairId} {
+      // Allow public read access for enabled tokens
+      allow get: if resource.data.enabled == true || isAdmin();
+      
+      // Allow listing all tokens for admins, but only enabled tokens for public
+      // Simplified rule to allow public read access to all tokens
+      allow list: if true;
+      
+      // Only admins can create, update, or delete tokens
+      allow create: if isAdmin() && isValidVVSPair(request.resource.data);
+      
+      allow update: if isAdmin() && isValidVVSPair(request.resource.data) && (
+        // Ensure timestamps are properly updated
+        request.resource.data.createdAt == resource.data.createdAt &&
+        request.resource.data.updatedAt == request.time
+      );
+      
+      allow delete: if isAdmin();
+    }
+    
+    // Staking contracts collection rules
+    match /staking-contracts/{contractId} {
+      // Allow public read access for enabled contracts
+      allow get: if resource.data.enabled == true || isAdmin();
+      
+      // Allow listing all contracts for admins, but only enabled contracts for public
+      // Simplified rule to allow public read access to all contracts
+      allow list: if true;
+      
+      // Only admins can create, update, or delete contracts
+      allow create: if isAdmin() && isValidStakingContract(request.resource.data);
+      
+      allow update: if isAdmin() && isValidStakingContract(request.resource.data) && (
+        // Ensure timestamps are properly updated
+        request.resource.data.createdAt == resource.data.createdAt &&
+        request.resource.data.updatedAt == request.time
+      );
+      
+      allow delete: if isAdmin();
+    }
+    
+    // LP Staking contracts collection rules
+    match /lp-staking-contracts/{contractId} {
+      // Allow public read access for enabled contracts
+      allow get: if resource.data.enabled == true || isAdmin();
+      
+      // Allow listing all contracts for admins, but only enabled contracts for public
+      allow list: if true;
+      
+      // Only admins can create, update, or delete contracts
+      allow create: if isAdmin();
+      
+      allow update: if isAdmin();
+      
+      allow delete: if isAdmin();
+    }
+    
+    // LP Staking contract submissions (user submissions)
+    match /lpStakingContracts/{contractId} {
+      // Allow public read access for enabled contracts
+      allow get: if resource.data.enabled == true || isAdmin();
+      
+      // Allow listing all contracts for admins, but only enabled contracts for public
+      allow list: if true;
+      
+      // Allow anyone to create submissions (user deployments)
+      allow create: if true;
+      
+      // Only admins can update or delete contracts
+      allow update: if isAdmin();
+      
+      allow delete: if isAdmin();
+    }
+    
+    // NFT Staking contracts collection rules
+    match /nftStakingContracts/{contractId} {
+      // Allow public read access for enabled contracts
+      allow get: if resource.data.enabled == true || isAdmin();
+      
+      // Allow listing all contracts for admins, but only enabled contracts for public
+      allow list: if true;
+      
+      // Allow authenticated users to create NFT staking contracts (user deployments)
+      // Allow admins to create contracts without restrictions
+      allow create: if (isAuthenticated() && isValidNftStakingContract(request.resource.data)) || isAdmin();
+      
+      // Only admins can update or delete contracts
+      allow update: if isAdmin();
+      
+      allow delete: if isAdmin();
+    }
+    
+    // Quests collection rules
+    match /quests/{questId} {
+      // Allow public read access for active quests
+      allow get: if resource.data.status == 'active' || isAdmin();
+      
+      // Allow listing all quests for admins, but only active quests for public
+      allow list: if true;
+      
+      // Only admins can create, update, or delete quests
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Submissions collection rules
+    match /submissions/{submissionId} {
+      // Allow users to read their own submissions
+      allow get: if isAuthenticated() && 
+                  resource.data.walletAddress == request.auth.uid;
+      
+      // Allow admins to read all submissions
+      allow list: if isAdmin();
+      
+      // Allow authenticated users to create submissions
+      allow create: if isAuthenticated() && 
+                    request.resource.data.walletAddress == request.auth.uid;
+      
+      // Only admins can update or delete submissions
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Partners collection rules
+    match /partners/{partnerId} {
+      // Allow public read access
+      allow get, list: if true;
+      
+      // Only admins can create, update, or delete partners
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Users collection rules
+    match /users/{userId} {
+      // Allow users to read and update their own data
+      allow get, update: if isAuthenticated() && 
+                          request.auth.uid == userId;
+      
+      // Allow admins to read and update all user data
+      allow get, list, update: if isAdmin();
+      
+      // Only admins can create or delete users
+      allow create, delete: if isAdmin();
+
+    }
+
+    // Global Imported Tokens collection rules
+    match /globalImportedTokens/{tokenAddress} {
+      // Allow anyone to read and write for now, as requested.
+      // Consider adding `if isAuthenticated()` later if needed.
+      allow read, write: if true; 
+    }
+    
+    // Contract Templates collection rules
+    match /contract-templates/{templateId} {
+      // Allow public read access for enabled templates
+      allow get: if resource.data.enabled == true || isAdmin();
+      
+      // Allow listing all templates for everyone
+      allow list: if true;
+      
+      // Only admins can create, update, or delete templates
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Deployed Contracts collection rules
+    match /deployed-contracts/{contractId} {
+      // Allow public read/write access for deployed contracts
+      // This is a simplified approach since authentication isn't critical for this feature
+      allow read, write: if true;
+    }
+    
+    // Projects collection rules
+    match /projects/{projectId} {
+      // Allow public access for now
+      allow read, write: if true;
+      
+      // TODO: Implement proper authentication and authorization
+      // The following rules will be implemented later:
+      
+      // Function to check if the address matches in a case-insensitive way
+      // function addressMatches(address1, address2) {
+      //   return address1.lower() == address2.lower();
+      // }
+      
+      // // Allow read for public projects
+      // allow read: if resource.data.settings.visibility == 'public';
+      
+      // // Allow read for unlisted projects if you have the link
+      // allow read: if resource.data.settings.visibility == 'unlisted';
+      
+      // // Allow read for private projects only by the owner
+      // allow read: if resource.data.settings.visibility == 'private' && 
+      //               isAuthenticated() && 
+      //               addressMatches(resource.data.owner, request.auth.uid);
+      
+      // // Allow read for the owner regardless of visibility
+      // allow read: if isAuthenticated() && 
+      //              addressMatches(resource.data.owner, request.auth.uid);
+      
+      // // Allow create for authenticated users
+      // allow create: if isAuthenticated() && 
+      //                addressMatches(request.resource.data.owner, request.auth.uid);
+      
+      // // Allow update and delete only for the owner
+      // allow update, delete: if isAuthenticated() && 
+      //                        addressMatches(resource.data.owner, request.auth.uid);
+    }
+    
+    // Staking customizations collection rules
+    match /staking-customizations/{customizationId} {
+      // Allow public read access to all customizations
+      allow get, list: if true;
+      
+      // Allow authenticated users to create and update customizations
+      // This is for staking page customizations which should be publicly accessible
+      allow create, update: if true;
+      
+      // Only admins can delete customizations
+      allow delete: if isAdmin();
+    }
+    
+    // User NFT contracts collection rules
+    match /user-nft-contracts/{contractId} {
+      // Allow public read access for enabled contracts
+      allow get: if resource.data.enabled == true || isAdmin();
+      
+      // Allow listing all contracts for admins, but only enabled contracts for public
+      allow list: if true;
+      
+      // Allow authenticated users to create NFT contracts (user deployments)
+      allow create: if true;
+      
+      // Allow contract owners to update their contracts
+      allow update: if true;
+      
+      // Only admins can delete contracts
+      allow delete: if isAdmin();
+    }
+    
+    // V3 Farms collection rules
+    match /v3Farms/{farmId} {
+      // Allow public read access for active farms
+      allow get: if resource.data.isActive == true || isAdmin();
+      
+      // Allow listing all farms
+      allow list: if true;
+      
+      // Only admins can create, update, or delete farms
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Default deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,480 @@
+/* Enhanced Quest System - Complete Styling Suite */
+
+/* Import all Enhanced Quest System styles */
+@import './EnhancedQuests.css';
+@import './QuestTypes.css';
+@import './QuestVerification.css';
+@import './EnhancedQuestWizard.css';
+@import './EnhancedSubmissionForm.css';
+@import './EnhancedQuestFilters.css';
+@import './EnhancedQuestAnimations.css';
+
+/* =============== Enhanced Quest System Root Variables =============== */
+
+:root {
+  /* Enhanced Quest System Color Palette */
+  --eq-primary: #3772FF;
+  --eq-primary-light: #44C4FF;
+  --eq-primary-dark: #2563EB;
+  
+  --eq-secondary: #6A29ED;
+  --eq-secondary-light: #A855F7;
+  --eq-secondary-dark: #5B21B6;
+  
+  --eq-success: #01E5A9;
+  --eq-success-light: #00D4AA;
+  --eq-success-dark: #059669;
+  
+  --eq-warning: #FFB800;
+  --eq-warning-light: #FCD34D;
+  --eq-warning-dark: #D97706;
+  
+  --eq-error: #FF4757;
+  --eq-error-light: #F87171;
+  --eq-error-dark: #DC2626;
+  
+  --eq-info: #6366F1;
+  --eq-info-light: #818CF8;
+  --eq-info-dark: #4F46E5;
+  
+  /* Enhanced Quest Background Colors */
+  --eq-bg-primary: rgba(10, 30, 61, 0.8);
+  --eq-bg-secondary: rgba(255, 255, 255, 0.02);
+  --eq-bg-tertiary: rgba(0, 0, 0, 0.1);
+  
+  /* Enhanced Quest Border Colors */
+  --eq-border-primary: rgba(255, 255, 255, 0.08);
+  --eq-border-secondary: rgba(255, 255, 255, 0.05);
+  --eq-border-accent: rgba(55, 114, 255, 0.2);
+  
+  /* Enhanced Quest Text Colors */
+  --eq-text-primary: rgba(255, 255, 255, 0.9);
+  --eq-text-secondary: rgba(255, 255, 255, 0.7);
+  --eq-text-tertiary: rgba(255, 255, 255, 0.5);
+  --eq-text-muted: rgba(255, 255, 255, 0.4);
+  
+  /* Enhanced Quest Spacing */
+  --eq-spacing-xs: 0.25rem;
+  --eq-spacing-sm: 0.5rem;
+  --eq-spacing-md: 1rem;
+  --eq-spacing-lg: 1.5rem;
+  --eq-spacing-xl: 2rem;
+  --eq-spacing-2xl: 3rem;
+  
+  /* Enhanced Quest Border Radius */
+  --eq-radius-sm: 0.375rem;
+  --eq-radius-md: 0.5rem;
+  --eq-radius-lg: 0.75rem;
+  --eq-radius-xl: 1rem;
+  --eq-radius-full: 9999px;
+  
+  /* Enhanced Quest Shadows */
+  --eq-shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --eq-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --eq-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --eq-shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Enhanced Quest Backdrop Filters */
+  --eq-backdrop-blur-sm: blur(8px);
+  --eq-backdrop-blur-md: blur(12px);
+  --eq-backdrop-blur-lg: blur(16px);
+  --eq-backdrop-blur-xl: blur(20px);
+  
+  /* Enhanced Quest Transitions */
+  --eq-transition-fast: 0.15s ease;
+  --eq-transition-normal: 0.3s ease;
+  --eq-transition-slow: 0.5s ease;
+  --eq-transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Enhanced Quest Z-Index Scale */
+  --eq-z-dropdown: 1000;
+  --eq-z-sticky: 1020;
+  --eq-z-fixed: 1030;
+  --eq-z-modal-backdrop: 1040;
+  --eq-z-modal: 1050;
+  --eq-z-popover: 1060;
+  --eq-z-tooltip: 1070;
+  --eq-z-toast: 1080;
+}
+
+/* =============== Enhanced Quest System Utility Classes =============== */
+
+/* Layout Utilities */
+.eq-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--eq-spacing-md);
+}
+
+.eq-grid {
+  display: grid;
+  gap: var(--eq-spacing-md);
+}
+
+.eq-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.eq-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.eq-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.eq-grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.eq-flex {
+  display: flex;
+}
+
+.eq-flex-col {
+  flex-direction: column;
+}
+
+.eq-flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.eq-flex-between {
+  justify-content: space-between;
+}
+
+.eq-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.eq-gap-sm {
+  gap: var(--eq-spacing-sm);
+}
+
+.eq-gap-md {
+  gap: var(--eq-spacing-md);
+}
+
+.eq-gap-lg {
+  gap: var(--eq-spacing-lg);
+}
+
+/* Spacing Utilities */
+.eq-p-sm { padding: var(--eq-spacing-sm); }
+.eq-p-md { padding: var(--eq-spacing-md); }
+.eq-p-lg { padding: var(--eq-spacing-lg); }
+.eq-p-xl { padding: var(--eq-spacing-xl); }
+
+.eq-m-sm { margin: var(--eq-spacing-sm); }
+.eq-m-md { margin: var(--eq-spacing-md); }
+.eq-m-lg { margin: var(--eq-spacing-lg); }
+.eq-m-xl { margin: var(--eq-spacing-xl); }
+
+.eq-mb-sm { margin-bottom: var(--eq-spacing-sm); }
+.eq-mb-md { margin-bottom: var(--eq-spacing-md); }
+.eq-mb-lg { margin-bottom: var(--eq-spacing-lg); }
+.eq-mb-xl { margin-bottom: var(--eq-spacing-xl); }
+
+.eq-mt-sm { margin-top: var(--eq-spacing-sm); }
+.eq-mt-md { margin-top: var(--eq-spacing-md); }
+.eq-mt-lg { margin-top: var(--eq-spacing-lg); }
+.eq-mt-xl { margin-top: var(--eq-spacing-xl); }
+
+/* Typography Utilities */
+.eq-text-xs { font-size: 0.75rem; }
+.eq-text-sm { font-size: 0.875rem; }
+.eq-text-base { font-size: 1rem; }
+.eq-text-lg { font-size: 1.125rem; }
+.eq-text-xl { font-size: 1.25rem; }
+.eq-text-2xl { font-size: 1.5rem; }
+.eq-text-3xl { font-size: 1.875rem; }
+
+.eq-font-normal { font-weight: 400; }
+.eq-font-medium { font-weight: 500; }
+.eq-font-semibold { font-weight: 600; }
+.eq-font-bold { font-weight: 700; }
+
+.eq-text-primary { color: var(--eq-text-primary); }
+.eq-text-secondary { color: var(--eq-text-secondary); }
+.eq-text-tertiary { color: var(--eq-text-tertiary); }
+.eq-text-muted { color: var(--eq-text-muted); }
+
+.eq-text-center { text-align: center; }
+.eq-text-left { text-align: left; }
+.eq-text-right { text-align: right; }
+
+/* Color Utilities */
+.eq-text-primary-color { color: var(--eq-primary); }
+.eq-text-secondary-color { color: var(--eq-secondary); }
+.eq-text-success { color: var(--eq-success); }
+.eq-text-warning { color: var(--eq-warning); }
+.eq-text-error { color: var(--eq-error); }
+.eq-text-info { color: var(--eq-info); }
+
+.eq-bg-primary { background-color: var(--eq-bg-primary); }
+.eq-bg-secondary { background-color: var(--eq-bg-secondary); }
+.eq-bg-tertiary { background-color: var(--eq-bg-tertiary); }
+
+/* Border Utilities */
+.eq-border { border: 1px solid var(--eq-border-primary); }
+.eq-border-secondary { border: 1px solid var(--eq-border-secondary); }
+.eq-border-accent { border: 1px solid var(--eq-border-accent); }
+
+.eq-border-t { border-top: 1px solid var(--eq-border-primary); }
+.eq-border-b { border-bottom: 1px solid var(--eq-border-primary); }
+.eq-border-l { border-left: 1px solid var(--eq-border-primary); }
+.eq-border-r { border-right: 1px solid var(--eq-border-primary); }
+
+.eq-rounded-sm { border-radius: var(--eq-radius-sm); }
+.eq-rounded-md { border-radius: var(--eq-radius-md); }
+.eq-rounded-lg { border-radius: var(--eq-radius-lg); }
+.eq-rounded-xl { border-radius: var(--eq-radius-xl); }
+.eq-rounded-full { border-radius: var(--eq-radius-full); }
+
+/* Shadow Utilities */
+.eq-shadow-sm { box-shadow: var(--eq-shadow-sm); }
+.eq-shadow-md { box-shadow: var(--eq-shadow-md); }
+.eq-shadow-lg { box-shadow: var(--eq-shadow-lg); }
+.eq-shadow-xl { box-shadow: var(--eq-shadow-xl); }
+
+/* Backdrop Filter Utilities */
+.eq-backdrop-blur-sm { backdrop-filter: var(--eq-backdrop-blur-sm); -webkit-backdrop-filter: var(--eq-backdrop-blur-sm); }
+.eq-backdrop-blur-md { backdrop-filter: var(--eq-backdrop-blur-md); -webkit-backdrop-filter: var(--eq-backdrop-blur-md); }
+.eq-backdrop-blur-lg { backdrop-filter: var(--eq-backdrop-blur-lg); -webkit-backdrop-filter: var(--eq-backdrop-blur-lg); }
+.eq-backdrop-blur-xl { backdrop-filter: var(--eq-backdrop-blur-xl); -webkit-backdrop-filter: var(--eq-backdrop-blur-xl); }
+
+/* Transition Utilities */
+.eq-transition-fast { transition: all var(--eq-transition-fast); }
+.eq-transition-normal { transition: all var(--eq-transition-normal); }
+.eq-transition-slow { transition: all var(--eq-transition-slow); }
+.eq-transition-smooth { transition: all var(--eq-transition-smooth); }
+
+/* Position Utilities */
+.eq-relative { position: relative; }
+.eq-absolute { position: absolute; }
+.eq-fixed { position: fixed; }
+.eq-sticky { position: sticky; }
+
+.eq-inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.eq-top-0 { top: 0; }
+.eq-right-0 { right: 0; }
+.eq-bottom-0 { bottom: 0; }
+.eq-left-0 { left: 0; }
+
+/* Z-Index Utilities */
+.eq-z-dropdown { z-index: var(--eq-z-dropdown); }
+.eq-z-sticky { z-index: var(--eq-z-sticky); }
+.eq-z-fixed { z-index: var(--eq-z-fixed); }
+.eq-z-modal { z-index: var(--eq-z-modal); }
+.eq-z-popover { z-index: var(--eq-z-popover); }
+.eq-z-tooltip { z-index: var(--eq-z-tooltip); }
+.eq-z-toast { z-index: var(--eq-z-toast); }
+
+/* Overflow Utilities */
+.eq-overflow-hidden { overflow: hidden; }
+.eq-overflow-auto { overflow: auto; }
+.eq-overflow-scroll { overflow: scroll; }
+
+/* Display Utilities */
+.eq-block { display: block; }
+.eq-inline { display: inline; }
+.eq-inline-block { display: inline-block; }
+.eq-hidden { display: none; }
+
+/* Visibility Utilities */
+.eq-visible { visibility: visible; }
+.eq-invisible { visibility: hidden; }
+
+/* Opacity Utilities */
+.eq-opacity-0 { opacity: 0; }
+.eq-opacity-25 { opacity: 0.25; }
+.eq-opacity-50 { opacity: 0.5; }
+.eq-opacity-75 { opacity: 0.75; }
+.eq-opacity-100 { opacity: 1; }
+
+/* =============== Enhanced Quest System Component Classes =============== */
+
+/* Base Quest Component */
+.eq-quest-component {
+  background: var(--eq-bg-primary);
+  border: 1px solid var(--eq-border-primary);
+  border-radius: var(--eq-radius-lg);
+  backdrop-filter: var(--eq-backdrop-blur-lg);
+  -webkit-backdrop-filter: var(--eq-backdrop-blur-lg);
+  box-shadow: var(--eq-shadow-md);
+  transition: var(--eq-transition-smooth);
+}
+
+/* Enhanced Quest Layout */
+.eq-quest-layout {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #041836, #0c2347, #0f2952, #041836);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced Quest Section */
+.eq-quest-section {
+  padding: var(--eq-spacing-xl) 0;
+}
+
+.eq-quest-section-header {
+  text-align: center;
+  margin-bottom: var(--eq-spacing-xl);
+}
+
+.eq-quest-section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, var(--eq-primary), var(--eq-primary-light));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: var(--eq-spacing-md);
+}
+
+.eq-quest-section-subtitle {
+  font-size: 1.125rem;
+  color: var(--eq-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* =============== Responsive Design =============== */
+
+@media (max-width: 1024px) {
+  .eq-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .eq-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .eq-container {
+    padding: 0 var(--eq-spacing-sm);
+  }
+  
+  .eq-grid-2,
+  .eq-grid-3,
+  .eq-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .eq-quest-section {
+    padding: var(--eq-spacing-lg) 0;
+  }
+  
+  .eq-quest-section-title {
+    font-size: 2rem;
+  }
+  
+  .eq-quest-section-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .eq-quest-section-title {
+    font-size: 1.75rem;
+  }
+  
+  .eq-text-xs { font-size: 0.7rem; }
+  .eq-text-sm { font-size: 0.8125rem; }
+  .eq-text-base { font-size: 0.875rem; }
+  .eq-text-lg { font-size: 1rem; }
+  .eq-text-xl { font-size: 1.125rem; }
+  .eq-text-2xl { font-size: 1.25rem; }
+  .eq-text-3xl { font-size: 1.5rem; }
+}
+
+/* =============== Dark Mode Support =============== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --eq-bg-primary: rgba(10, 30, 61, 0.9);
+    --eq-bg-secondary: rgba(255, 255, 255, 0.03);
+    --eq-bg-tertiary: rgba(0, 0, 0, 0.2);
+    
+    --eq-border-primary: rgba(255, 255, 255, 0.1);
+    --eq-border-secondary: rgba(255, 255, 255, 0.06);
+    
+    --eq-text-primary: rgba(255, 255, 255, 0.95);
+    --eq-text-secondary: rgba(255, 255, 255, 0.8);
+    --eq-text-tertiary: rgba(255, 255, 255, 0.6);
+    --eq-text-muted: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* =============== High Contrast Mode =============== */
+
+@media (prefers-contrast: high) {
+  :root {
+    --eq-border-primary: rgba(255, 255, 255, 0.3);
+    --eq-border-secondary: rgba(255, 255, 255, 0.2);
+    --eq-text-primary: rgba(255, 255, 255, 1);
+    --eq-text-secondary: rgba(255, 255, 255, 0.9);
+  }
+  
+  .eq-border,
+  .eq-border-secondary,
+  .eq-border-accent {
+    border-width: 2px;
+  }
+}
+
+/* =============== Reduced Motion Support =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --eq-transition-fast: 0.01ms;
+    --eq-transition-normal: 0.01ms;
+    --eq-transition-slow: 0.01ms;
+    --eq-transition-smooth: 0.01ms;
+  }
+  
+  .eq-quest-layout {
+    animation: none;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============== Print Styles =============== */
+
+@media print {
+  .eq-quest-layout {
+    background: white;
+    color: black;
+  }
+  
+  .eq-quest-component {
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .eq-text-primary,
+  .eq-text-secondary,
+  .eq-text-tertiary {
+    color: black;
+  }
+}

@@ -1,0 +1,512 @@
+'use client'
+
+import { ethers } from 'ethers'
+import { useAppKitAccount, useAppKitNetwork, useAppKitProvider } from '@reown/appkit/react'
+
+/**
+ * Hook for interacting with vault contracts on Cronos
+ * @param contractAddress The address of the vault contract
+ * @param abi The ABI of the vault contract
+ * @returns Object with functions to interact with the vault contract
+ */
+export function useVaultContract(contractAddress: string, abi: any[]) {
+  const { address } = useAppKitAccount()
+  const { chainId } = useAppKitNetwork()
+  const { walletProvider } = useAppKitProvider('eip155')
+  
+  // Cache for token decimals to avoid redundant calls
+  const decimalsCache = {
+    depositTokenDecimals: undefined as number | undefined,
+    rewardTokenDecimals: undefined as number | undefined
+  };
+  
+  /**
+   * Get the vault contract instance
+   * @returns The vault contract instance or null if not connected
+   */
+  const getVaultContract = () => {
+    if (!walletProvider || !address) {
+      return null;
+    }
+    
+    if (!contractAddress || contractAddress === '' || !abi || abi.length === 0) {
+      return null;
+    }
+    
+    try {
+      const provider = new ethers.providers.Web3Provider(walletProvider as any, Number(chainId))
+      const signer = provider.getSigner(address)
+      return new ethers.Contract(contractAddress, abi, signer)
+    } catch (error) {
+      console.error("Error creating vault contract instance:", error);
+      return null;
+    }
+  }
+  
+  /**
+   * Get token decimals for the deposit and reward tokens
+   * @returns Object with deposit and reward token decimals
+   */
+  const getTokenDecimals = async () => {
+    try {
+      // Return cached values if available
+      if (decimalsCache.depositTokenDecimals !== undefined && decimalsCache.rewardTokenDecimals !== undefined) {
+        return {
+          depositTokenDecimals: decimalsCache.depositTokenDecimals,
+          rewardTokenDecimals: decimalsCache.rewardTokenDecimals
+        };
+      }
+      
+      const contract = getVaultContract();
+      if (!contract) return { depositTokenDecimals: 18, rewardTokenDecimals: 18 };
+      
+      // Try to get depositToken and rewardToken addresses from the contract
+      let depositTokenAddress, rewardTokenAddress;
+      
+      try {
+        depositTokenAddress = await contract.stakeToken();
+      } catch (error) {
+        try {
+          depositTokenAddress = await contract.depositToken();
+        } catch (innerError) {
+          depositTokenAddress = null;
+        }
+      }
+      
+      try {
+        rewardTokenAddress = await contract.rewardToken();
+      } catch (error) {
+        rewardTokenAddress = null;
+      }
+      
+      // Default decimals
+      let depositTokenDecimals = 18;
+      let rewardTokenDecimals = 18;
+      
+      // Get decimals if addresses are available
+      if (depositTokenAddress) {
+        try {
+          // Use the provider we already created for consistency
+          const provider = new ethers.providers.Web3Provider(walletProvider as any, Number(chainId));
+          const depositTokenContract = new ethers.Contract(
+            depositTokenAddress,
+            ["function decimals() view returns (uint8)"],
+            provider
+          );
+          depositTokenDecimals = await depositTokenContract.decimals();
+          
+          // Cache the result
+          decimalsCache.depositTokenDecimals = depositTokenDecimals;
+        } catch (error) {
+          console.error("Error getting deposit token decimals:", error);
+        }
+      }
+      
+      if (rewardTokenAddress) {
+        try {
+          // Use the provider we already created for consistency
+          const provider = new ethers.providers.Web3Provider(walletProvider as any, Number(chainId));
+          const rewardTokenContract = new ethers.Contract(
+            rewardTokenAddress,
+            ["function decimals() view returns (uint8)"],
+            provider
+          );
+          rewardTokenDecimals = await rewardTokenContract.decimals();
+          
+          // Cache the result
+          decimalsCache.rewardTokenDecimals = rewardTokenDecimals;
+        } catch (error) {
+          console.error("Error getting reward token decimals:", error);
+        }
+      }
+      
+      return { depositTokenDecimals, rewardTokenDecimals };
+    } catch (error) {
+      console.error("Error getting token decimals:", error);
+      return { depositTokenDecimals: 18, rewardTokenDecimals: 18 };
+    }
+  };
+  
+  /**
+   * Get user vault info
+   * @returns User vault info or null if not connected
+   */
+  const getUserInfo = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract || !address) {
+        return null;
+      }
+      
+      // Get token decimals
+      const { depositTokenDecimals } = await getTokenDecimals();
+      
+      const userInfo = await contract.userInfo(address)
+      
+      return {
+        amount: ethers.utils.formatUnits(userInfo.amount || userInfo.totalAmount || 0, depositTokenDecimals),
+        rewardDebt: ethers.utils.formatUnits(userInfo.rewardDebt || 0, depositTokenDecimals),
+        depositor: userInfo.depositor || address,
+        depositTimestamp: userInfo.depositTimestamp ? userInfo.depositTimestamp.toNumber() : 0
+      }
+    } catch (error) {
+      console.error('Error getting user info:', error)
+      return null
+    }
+  }
+  
+  /**
+   * Get pending rewards
+   * @returns Pending rewards as a string or '0' if not connected
+   */
+  const getPendingRewards = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract || !address) {
+        return '0';
+      }
+      
+      // Get token decimals
+      const { rewardTokenDecimals } = await getTokenDecimals();
+      
+      const pendingReward = await contract.pendingReward(address)
+      
+      return ethers.utils.formatUnits(pendingReward, rewardTokenDecimals)
+    } catch (error) {
+      console.error('Error getting pending rewards:', error)
+      return '0'
+    }
+  }
+  
+  /**
+   * Deposit tokens into the vault
+   * @param amount Amount to deposit as a string
+   * @returns Transaction receipt
+   */
+  const depositTokens = async (amount: string) => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) throw new Error('Contract not initialized')
+      
+      // Get token decimals for accurate amount parsing
+      const { depositTokenDecimals } = await getTokenDecimals()
+      
+      const amountInWei = ethers.utils.parseUnits(amount, depositTokenDecimals)
+      
+      // Try to determine if the contract requires a pool ID parameter
+      let tx;
+      try {
+        // First try with pool ID 0 (most common for vaults with pools)
+        tx = await contract.deposit(0, amountInWei);
+      } catch (error) {
+        // If that fails, try without pool ID
+        tx = await contract.deposit(amountInWei);
+      }
+      
+      return await tx.wait()
+    } catch (error) {
+      console.error('Error depositing tokens:', error)
+      throw error
+    }
+  }
+  
+  /**
+   * Withdraw tokens from the vault
+   * @param amount Amount to withdraw as a string
+   * @returns Transaction receipt
+   */
+  const withdrawTokens = async (amount: string) => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) throw new Error('Contract not initialized')
+      
+      // Get token decimals for accurate amount parsing
+      const { depositTokenDecimals } = await getTokenDecimals()
+      
+      const amountInWei = ethers.utils.parseUnits(amount, depositTokenDecimals)
+      
+      const tx = await contract.withdraw(amountInWei)
+      return await tx.wait()
+    } catch (error) {
+      console.error('Error withdrawing tokens:', error)
+      throw error
+    }
+  }
+  
+  /**
+   * Emergency withdraw
+   * @returns Transaction receipt
+   */
+  const emergencyWithdraw = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) throw new Error('Contract not initialized')
+      
+      const tx = await contract.emergencyWithdraw()
+      return await tx.wait()
+    } catch (error) {
+      console.error('Error emergency withdrawing:', error)
+      throw error
+    }
+  }
+  
+  /**
+   * Check if user can withdraw
+   * @returns Boolean indicating if user can withdraw
+   */
+  const canWithdraw = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract || !address) return false
+      
+      // Try to call canWithdraw function if it exists
+      try {
+        return await contract.canWithdraw(address)
+      } catch (error) {
+        // If canWithdraw doesn't exist, check if the user has any stakes
+        const userInfo = await getUserInfo();
+        return userInfo && parseFloat(userInfo.amount) > 0;
+      }
+    } catch (error) {
+      console.error('Error checking if user can withdraw:', error)
+      return false
+    }
+  }
+  
+  /**
+   * Get all depositors
+   * @returns Array of depositor info
+   */
+  const getDepositors = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) return []
+      
+      // Get token decimals for accurate formatting
+      const { depositTokenDecimals, rewardTokenDecimals } = await getTokenDecimals()
+      
+      const depositors = await contract.getDepositors()
+      return depositors.map((depositor: any) => ({
+        amount: ethers.utils.formatUnits(depositor.amount, depositTokenDecimals),
+        rewardDebt: ethers.utils.formatUnits(depositor.rewardDebt, rewardTokenDecimals),
+        depositor: depositor.depositor,
+        depositTimestamp: depositor.depositTimestamp.toNumber()
+      }))
+    } catch (error) {
+      console.error('Error getting depositors:', error)
+      return []
+    }
+  }
+  
+  /**
+   * Get total deposited token amount
+   * @returns Total deposited token amount as a string
+   */
+  const getDepositedTokenAmount = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) return '0'
+      
+      // Get token decimals for accurate formatting
+      const { depositTokenDecimals } = await getTokenDecimals()
+      
+      const depositedTokenAmount = await contract.depositedTokenAmount()
+      return ethers.utils.formatUnits(depositedTokenAmount, depositTokenDecimals)
+    } catch (error) {
+      console.error('Error getting deposited token amount:', error)
+      return '0'
+    }
+  }
+  
+  /**
+   * Claim rewards without withdrawing tokens
+   * @returns Transaction receipt
+   */
+  const claimRewards = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) throw new Error('Contract not initialized')
+      
+      // Call withdraw with 0 amount to claim rewards without withdrawing
+      const tx = await contract.withdraw(ethers.constants.Zero)
+      return await tx.wait()
+    } catch (error) {
+      console.error('Error claiming rewards:', error)
+      throw error
+    }
+  }
+  
+  /**
+   * Calculate APR based on contract data
+   * @returns APR as a string percentage (e.g., "12.5%")
+   */
+  const getAPR = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) return '0%'
+      
+      // Get necessary data from contract
+      let rewardRate;
+      try {
+        // Try rewardPerSecond first (from vaults.json ABI)
+        rewardRate = await contract.rewardPerSecond();
+      } catch (error) {
+        try {
+          // Fallback to rewardPerBlock if rewardPerSecond doesn't exist
+          rewardRate = await contract.rewardPerBlock();
+        } catch (innerError) {
+          console.error('Error getting reward rate:', innerError);
+          return '0%';
+        }
+      }
+      
+      let totalDeposited;
+      try {
+        totalDeposited = await contract.depositedTokenAmount();
+      } catch (error) {
+        try {
+          // Try alternative method to get total staked
+          const poolInfo = await contract.poolInfo(0);
+          totalDeposited = poolInfo.totalAmount || poolInfo.totalStaked || 0;
+        } catch (innerError) {
+          console.error('Error getting total deposited:', innerError);
+          return '0%';
+        }
+      }
+      
+      // If there are no tokens deposited, return 0%
+      if (totalDeposited.isZero()) return '0%'
+      
+      // Get token decimals
+      const { depositTokenDecimals, rewardTokenDecimals } = await getTokenDecimals();
+      
+      // Calculate time period (seconds or blocks per year)
+      const secondsPerYear = 365 * 24 * 60 * 60;
+      const blocksPerYear = 15000 * 365; // Estimate for Cronos
+      
+      // Calculate annual rewards
+      let annualRewards;
+      try {
+        // Check if we're using seconds or blocks for rewards
+        const hasRewardPerSecond = await contract.rewardPerSecond().then(() => true).catch(() => false);
+        
+        if (hasRewardPerSecond) {
+          annualRewards = rewardRate.mul(secondsPerYear);
+        } else {
+          annualRewards = rewardRate.mul(blocksPerYear);
+        }
+      } catch (error) {
+        // Default to assuming blocks
+        annualRewards = rewardRate.mul(blocksPerYear);
+      }
+      
+      // Calculate APR (assuming 1:1 price ratio for simplicity)
+      // (annual rewards / total deposited) * 100
+      const apr = annualRewards.mul(10000).div(totalDeposited)
+      const aprPercentage = (apr.toNumber() / 100).toFixed(2)
+      
+      return `${aprPercentage}%`
+    } catch (error) {
+      console.error('Error calculating APR:', error)
+      return '0%'
+    }
+  }
+  
+  /**
+   * Get vault contract info
+   * @returns Vault contract info
+   */
+  const getVaultInfo = async () => {
+    try {
+      const contract = getVaultContract()
+      if (!contract) return null
+      
+      // Get token decimals
+      const { depositTokenDecimals, rewardTokenDecimals } = await getTokenDecimals()
+      
+      // Get deposit token and reward token addresses
+      let depositTokenAddress, rewardTokenAddress;
+      
+      try {
+        depositTokenAddress = await contract.stakeToken();
+      } catch (error) {
+        try {
+          depositTokenAddress = await contract.depositToken();
+        } catch (innerError) {
+          depositTokenAddress = null;
+        }
+      }
+      
+      try {
+        rewardTokenAddress = await contract.rewardToken();
+      } catch (error) {
+        rewardTokenAddress = null;
+      }
+      
+      // Get total deposited and total rewards
+      let totalDeposited, totalRewards;
+      
+      try {
+        totalDeposited = await contract.depositedTokenAmount();
+      } catch (error) {
+        totalDeposited = ethers.BigNumber.from(0);
+      }
+      
+      try {
+        totalRewards = await contract.totalRewards();
+      } catch (error) {
+        totalRewards = ethers.BigNumber.from(0);
+      }
+      
+      // Get start and end timestamps/blocks
+      let startTime, endTime;
+      
+      try {
+        startTime = await contract.rewardStartTimestamp();
+      } catch (error) {
+        try {
+          startTime = await contract.startBlock();
+        } catch (innerError) {
+          startTime = ethers.BigNumber.from(0);
+        }
+      }
+      
+      try {
+        endTime = await contract.rewardEndTimestamp();
+      } catch (error) {
+        try {
+          endTime = await contract.endBlock();
+        } catch (innerError) {
+          endTime = ethers.BigNumber.from(0);
+        }
+      }
+      
+      return {
+        depositTokenAddress,
+        rewardTokenAddress,
+        totalDeposited: ethers.utils.formatUnits(totalDeposited, depositTokenDecimals),
+        totalRewards: ethers.utils.formatUnits(totalRewards, rewardTokenDecimals),
+        startTime: startTime.toNumber(),
+        endTime: endTime.toNumber(),
+        apr: await getAPR()
+      }
+    } catch (error) {
+      console.error('Error getting vault info:', error)
+      return null
+    }
+  }
+  
+  return {
+    getUserInfo,
+    getPendingRewards,
+    depositTokens,
+    withdrawTokens,
+    emergencyWithdraw,
+    canWithdraw,
+    getDepositors,
+    getDepositedTokenAmount,
+    claimRewards,
+    getAPR,
+    getVaultInfo
+  }
+}

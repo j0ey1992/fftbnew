@@ -1,0 +1,488 @@
+/* Enhanced Quest System Styles - Comprehensive Visual Design */
+
+/* =============== Enhanced Quest Card Styles =============== */
+
+.enhanced-quest-card {
+  background: rgba(10, 30, 61, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-quest-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 
+    0 15px 35px -5px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(55, 114, 255, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(55, 114, 255, 0.2);
+}
+
+.enhanced-quest-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #3772FF, #44C4FF, #6A29ED);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.enhanced-quest-card:hover::before {
+  opacity: 1;
+}
+
+/* Enhanced Quest Card Header */
+.enhanced-quest-card-header {
+  position: relative;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.enhanced-quest-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(55, 114, 255, 0.3), transparent);
+}
+
+/* Quest Type Icon Container */
+.quest-type-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: rgba(55, 114, 255, 0.1);
+  border: 1px solid rgba(55, 114, 255, 0.2);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.enhanced-quest-card:hover .quest-type-icon-container {
+  background: rgba(55, 114, 255, 0.2);
+  border-color: rgba(55, 114, 255, 0.4);
+  transform: scale(1.1);
+}
+
+/* Enhanced Badge */
+.enhanced-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.enhanced-badge:hover::before {
+  left: 100%;
+}
+
+.enhanced-badge:hover {
+  transform: translateY(-1px) scale(1.05);
+}
+
+/* Enhanced Badge Variants */
+.enhanced-badge-purple {
+  background: rgba(106, 41, 237, 0.15);
+  color: #A855F7;
+  border-color: rgba(106, 41, 237, 0.3);
+}
+
+.enhanced-badge-blue {
+  background: rgba(55, 114, 255, 0.15);
+  color: #3772FF;
+  border-color: rgba(55, 114, 255, 0.3);
+}
+
+.enhanced-badge-green {
+  background: rgba(1, 229, 169, 0.15);
+  color: #01E5A9;
+  border-color: rgba(1, 229, 169, 0.3);
+}
+
+.enhanced-badge-orange {
+  background: rgba(255, 184, 0, 0.15);
+  color: #FFB800;
+  border-color: rgba(255, 184, 0, 0.3);
+}
+
+.enhanced-badge-red {
+  background: rgba(255, 71, 87, 0.15);
+  color: #FF4757;
+  border-color: rgba(255, 71, 87, 0.3);
+}
+
+/* Status Indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.status-indicator-available {
+  background: rgba(55, 114, 255, 0.1);
+  color: #3772FF;
+  border-color: rgba(55, 114, 255, 0.3);
+}
+
+.status-indicator-completed {
+  background: rgba(1, 229, 169, 0.1);
+  color: #01E5A9;
+  border-color: rgba(1, 229, 169, 0.3);
+}
+
+.status-indicator-pending {
+  background: rgba(255, 184, 0, 0.1);
+  color: #FFB800;
+  border-color: rgba(255, 184, 0, 0.3);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.status-indicator-rejected {
+  background: rgba(255, 71, 87, 0.1);
+  color: #FF4757;
+  border-color: rgba(255, 71, 87, 0.3);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 184, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 184, 0, 0.6);
+  }
+}
+
+/* Verification Method Badges */
+.verification-method-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
+}
+
+.verification-method-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* AI and Blockchain Feature Indicators */
+.feature-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.feature-indicator-ai {
+  background: rgba(55, 114, 255, 0.1);
+  color: #3772FF;
+  border: 1px solid rgba(55, 114, 255, 0.2);
+}
+
+.feature-indicator-blockchain {
+  background: rgba(106, 41, 237, 0.1);
+  color: #A855F7;
+  border: 1px solid rgba(106, 41, 237, 0.2);
+}
+
+.feature-indicator:hover {
+  transform: translateY(-1px) scale(1.05);
+}
+
+/* Enhanced Quest Actions */
+.enhanced-quest-actions {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.enhanced-quest-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.enhanced-quest-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.enhanced-quest-button:hover::before {
+  left: 100%;
+}
+
+.enhanced-quest-button:hover {
+  transform: translateY(-2px);
+}
+
+.enhanced-quest-button:active {
+  transform: translateY(0);
+}
+
+/* Button Variants */
+.enhanced-quest-button-primary {
+  background: linear-gradient(to right, #3772FF, #44C4FF);
+  color: white;
+  box-shadow: 0 4px 12px rgba(55, 114, 255, 0.3);
+}
+
+.enhanced-quest-button-primary:hover {
+  box-shadow: 0 6px 16px rgba(55, 114, 255, 0.4);
+}
+
+.enhanced-quest-button-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.enhanced-quest-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.enhanced-quest-button-success {
+  background: linear-gradient(to right, #01E5A9, #00D4AA);
+  color: white;
+  box-shadow: 0 4px 12px rgba(1, 229, 169, 0.3);
+}
+
+.enhanced-quest-button-disabled {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Time Remaining Indicator */
+.time-remaining {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  background: rgba(255, 184, 0, 0.1);
+  color: #FFB800;
+  border: 1px solid rgba(255, 184, 0, 0.2);
+}
+
+.time-remaining-urgent {
+  background: rgba(255, 71, 87, 0.1);
+  color: #FF4757;
+  border-color: rgba(255, 71, 87, 0.2);
+  animation: urgent-pulse 1s ease-in-out infinite;
+}
+
+@keyframes urgent-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Reward Display */
+.reward-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.reward-amount {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #01E5A9;
+  text-shadow: 0 0 10px rgba(1, 229, 169, 0.3);
+}
+
+.reward-xp {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #3772FF;
+  text-shadow: 0 0 8px rgba(55, 114, 255, 0.3);
+}
+
+/* Participant Count */
+.participant-count {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.participant-count-full {
+  color: #FFB800;
+}
+
+/* Loading States */
+.enhanced-quest-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-quest-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .enhanced-quest-card {
+    margin: 0.5rem;
+  }
+  
+  .enhanced-quest-card-header {
+    padding: 1rem;
+  }
+  
+  .enhanced-quest-actions {
+    padding: 1rem;
+  }
+  
+  .quest-type-icon-container {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
+  
+  .enhanced-quest-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .enhanced-badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .verification-method-badge {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+  }
+  
+  .feature-indicator {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .enhanced-quest-card {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .enhanced-badge,
+  .status-indicator,
+  .verification-method-badge,
+  .feature-indicator {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-quest-card,
+  .enhanced-badge,
+  .enhanced-quest-button,
+  .quest-type-icon-container {
+    transition: none;
+    animation: none;
+  }
+  
+  .enhanced-quest-card:hover {
+    transform: none;
+  }
+}

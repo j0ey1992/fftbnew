@@ -1,0 +1,595 @@
+/* Quest Verification Status and Method Styling */
+
+/* =============== Verification Status Indicators =============== */
+
+.verification-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.verification-status::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.verification-status:hover::before {
+  left: 100%;
+}
+
+/* Pending Verification */
+.verification-status-pending {
+  background: rgba(255, 184, 0, 0.1);
+  color: #FFB800;
+  border-color: rgba(255, 184, 0, 0.3);
+  animation: pending-pulse 2s ease-in-out infinite;
+}
+
+@keyframes pending-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 184, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 184, 0, 0);
+  }
+}
+
+/* Approved/Verified */
+.verification-status-approved,
+.verification-status-verified {
+  background: rgba(1, 229, 169, 0.1);
+  color: #01E5A9;
+  border-color: rgba(1, 229, 169, 0.3);
+}
+
+.verification-status-approved:hover,
+.verification-status-verified:hover {
+  background: rgba(1, 229, 169, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(1, 229, 169, 0.2);
+}
+
+/* Rejected */
+.verification-status-rejected {
+  background: rgba(255, 71, 87, 0.1);
+  color: #FF4757;
+  border-color: rgba(255, 71, 87, 0.3);
+}
+
+.verification-status-rejected:hover {
+  background: rgba(255, 71, 87, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+}
+
+/* In Review */
+.verification-status-review {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366F1;
+  border-color: rgba(99, 102, 241, 0.3);
+  animation: review-glow 3s ease-in-out infinite;
+}
+
+@keyframes review-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+  }
+}
+
+/* =============== AI Verification Indicators =============== */
+
+.ai-verification-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(55, 114, 255, 0.1);
+  color: #3772FF;
+  border: 1px solid rgba(55, 114, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.ai-verification-indicator:hover {
+  background: rgba(55, 114, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.ai-verification-indicator .ai-icon {
+  width: 1rem;
+  height: 1rem;
+  animation: ai-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ai-pulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* AI Confidence Score */
+.ai-confidence-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(55, 114, 255, 0.1);
+  color: #3772FF;
+  border: 1px solid rgba(55, 114, 255, 0.2);
+}
+
+.ai-confidence-high {
+  background: rgba(1, 229, 169, 0.1);
+  color: #01E5A9;
+  border-color: rgba(1, 229, 169, 0.2);
+}
+
+.ai-confidence-medium {
+  background: rgba(255, 184, 0, 0.1);
+  color: #FFB800;
+  border-color: rgba(255, 184, 0, 0.2);
+}
+
+.ai-confidence-low {
+  background: rgba(255, 71, 87, 0.1);
+  color: #FF4757;
+  border-color: rgba(255, 71, 87, 0.2);
+}
+
+/* =============== Cronos Chain Verification =============== */
+
+.cronos-verification-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(106, 41, 237, 0.1);
+  color: #A855F7;
+  border: 1px solid rgba(106, 41, 237, 0.2);
+  transition: all 0.2s ease;
+}
+
+.cronos-verification-indicator:hover {
+  background: rgba(106, 41, 237, 0.15);
+  transform: translateY(-1px);
+}
+
+.cronos-verification-indicator .blockchain-icon {
+  width: 1rem;
+  height: 1rem;
+  animation: blockchain-spin 3s linear infinite;
+}
+
+@keyframes blockchain-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Transaction Hash Display */
+.transaction-hash {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.transaction-hash:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.transaction-hash .copy-button {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.transaction-hash .copy-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* =============== Verification Progress Indicators =============== */
+
+.verification-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.verification-progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.verification-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #3772FF, #44C4FF);
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.verification-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: progress-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes progress-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.verification-progress-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* =============== Verification Method Badges =============== */
+
+.verification-method {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid;
+  transition: all 0.2s ease;
+}
+
+/* Image AI Analysis */
+.verification-method-image-ai {
+  background: rgba(55, 114, 255, 0.1);
+  color: #3772FF;
+  border-color: rgba(55, 114, 255, 0.2);
+}
+
+.verification-method-image-ai:hover {
+  background: rgba(55, 114, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Link AI Verification */
+.verification-method-link-ai {
+  background: rgba(1, 229, 169, 0.1);
+  color: #01E5A9;
+  border-color: rgba(1, 229, 169, 0.2);
+}
+
+.verification-method-link-ai:hover {
+  background: rgba(1, 229, 169, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Cronos Chain Verification */
+.verification-method-cronos {
+  background: rgba(106, 41, 237, 0.1);
+  color: #A855F7;
+  border-color: rgba(106, 41, 237, 0.2);
+}
+
+.verification-method-cronos:hover {
+  background: rgba(106, 41, 237, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Auto Complete */
+.verification-method-auto {
+  background: rgba(1, 229, 169, 0.1);
+  color: #01E5A9;
+  border-color: rgba(1, 229, 169, 0.2);
+}
+
+.verification-method-auto:hover {
+  background: rgba(1, 229, 169, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Manual Review */
+.verification-method-manual {
+  background: rgba(107, 114, 128, 0.1);
+  color: #9CA3AF;
+  border-color: rgba(107, 114, 128, 0.2);
+}
+
+.verification-method-manual:hover {
+  background: rgba(107, 114, 128, 0.15);
+  transform: translateY(-1px);
+}
+
+/* =============== Verification Result Cards =============== */
+
+.verification-result-card {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.verification-result-success {
+  background: rgba(1, 229, 169, 0.05);
+  border-color: rgba(1, 229, 169, 0.2);
+}
+
+.verification-result-success:hover {
+  background: rgba(1, 229, 169, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(1, 229, 169, 0.1);
+}
+
+.verification-result-warning {
+  background: rgba(255, 184, 0, 0.05);
+  border-color: rgba(255, 184, 0, 0.2);
+}
+
+.verification-result-warning:hover {
+  background: rgba(255, 184, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 184, 0, 0.1);
+}
+
+.verification-result-error {
+  background: rgba(255, 71, 87, 0.05);
+  border-color: rgba(255, 71, 87, 0.2);
+}
+
+.verification-result-error:hover {
+  background: rgba(255, 71, 87, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 71, 87, 0.1);
+}
+
+/* =============== Loading States =============== */
+
+.verification-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(55, 114, 255, 0.1);
+  color: #3772FF;
+  border: 1px solid rgba(55, 114, 255, 0.2);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.verification-loading-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(55, 114, 255, 0.2);
+  border-top: 2px solid #3772FF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =============== Verification Timeline =============== */
+
+.verification-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.verification-timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.verification-timeline-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.verification-timeline-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.verification-timeline-icon-pending {
+  background: rgba(255, 184, 0, 0.2);
+  color: #FFB800;
+  animation: timeline-pulse 2s ease-in-out infinite;
+}
+
+.verification-timeline-icon-completed {
+  background: rgba(1, 229, 169, 0.2);
+  color: #01E5A9;
+}
+
+.verification-timeline-icon-failed {
+  background: rgba(255, 71, 87, 0.2);
+  color: #FF4757;
+}
+
+@keyframes timeline-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.verification-timeline-content {
+  flex: 1;
+}
+
+.verification-timeline-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.25rem;
+}
+
+.verification-timeline-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
+}
+
+.verification-timeline-timestamp {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.25rem;
+}
+
+/* =============== Responsive Design =============== */
+
+@media (max-width: 768px) {
+  .verification-status,
+  .ai-verification-indicator,
+  .cronos-verification-indicator {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .verification-method {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .verification-timeline-item {
+    padding: 0.5rem;
+  }
+  
+  .verification-timeline-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .transaction-hash {
+    font-size: 0.7rem;
+    padding: 0.375rem 0.5rem;
+  }
+  
+  .verification-result-card {
+    padding: 0.75rem;
+  }
+}
+
+/* =============== High Contrast Mode =============== */
+
+@media (prefers-contrast: high) {
+  .verification-status,
+  .ai-verification-indicator,
+  .cronos-verification-indicator,
+  .verification-method {
+    border-width: 2px;
+  }
+}
+
+/* =============== Reduced Motion =============== */
+
+@media (prefers-reduced-motion: reduce) {
+  .verification-status-pending,
+  .verification-status-review,
+  .ai-verification-indicator .ai-icon,
+  .cronos-verification-indicator .blockchain-icon,
+  .verification-timeline-icon-pending {
+    animation: none;
+  }
+  
+  .verification-progress-fill::after {
+    animation: none;
+  }
+}
