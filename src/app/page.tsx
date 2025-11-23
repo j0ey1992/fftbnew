@@ -18,7 +18,7 @@ export default function Home() {
       <div className="relative min-h-[60vh] flex flex-col items-center justify-center text-center mb-20 overflow-hidden rounded-2xl">
         {/* Video Background */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <iframe
+          <video
             className="absolute top-1/2 left-1/2 pointer-events-none"
             style={{
               transform: 'translate(-50%, -50%)',
@@ -26,11 +26,13 @@ export default function Home() {
               height: '56.25vw',
               minWidth: '100%',
               minHeight: '100%',
+              objectFit: 'cover',
             }}
-            src="https://www.youtube.com/embed/G1ZuZtwOcW4?autoplay=1&mute=1&loop=1&playlist=G1ZuZtwOcW4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3"
-            title="FFTB Background"
-            allow="autoplay; encrypted-media"
-            frameBorder="0"
+            src="/Crypto_space_202511231346_8idz8.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
           />
         </div>
 
