@@ -18,42 +18,54 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
+// Check if Firebase credentials are available
+const hasFirebaseCredentials = !!(
+  firebaseConfig.apiKey &&
+  firebaseConfig.projectId &&
+  firebaseConfig.appId
+);
+
 // Initialize Firebase
-let firebaseApp: FirebaseApp;
-let firestoreDB: Firestore;
-let firebaseAuth: Auth;
-let firebaseStorage: FirebaseStorage;
+let firebaseApp: FirebaseApp | undefined;
+let firestoreDB: Firestore | undefined;
+let firebaseAuth: Auth | undefined;
+let firebaseStorage: FirebaseStorage | undefined;
 
-// Initialize Firebase immediately
-try {
-  // Prevent multiple initializations in development with React strict mode
-  if (!getApps().length) {
-    console.log('Initializing Firebase app...');
-    firebaseApp = initializeApp(firebaseConfig);
-  } else {
-    console.log('Using existing Firebase app...');
-    firebaseApp = getApps()[0];
+// Initialize Firebase immediately only if credentials are available
+if (hasFirebaseCredentials) {
+  try {
+    // Prevent multiple initializations in development with React strict mode
+    if (!getApps().length) {
+      console.log('Initializing Firebase app...');
+      firebaseApp = initializeApp(firebaseConfig);
+    } else {
+      console.log('Using existing Firebase app...');
+      firebaseApp = getApps()[0];
+    }
+
+    firebaseAuth = getAuth(firebaseApp);
+    firebaseStorage = getStorage(firebaseApp);
+
+    // Initialize Firestore directly
+    firestoreDB = getFirestore(firebaseApp);
+    console.log('Firestore initialized successfully');
+
+    console.log('Firebase initialized successfully');
+  } catch (error) {
+    console.error('Error initializing Firebase:', error);
+    // Don't throw - allow the app to build without Firebase
   }
-
-  firebaseAuth = getAuth(firebaseApp);
-  firebaseStorage = getStorage(firebaseApp);
-  
-  // Initialize Firestore directly
-  firestoreDB = getFirestore(firebaseApp);
-  console.log('Firestore initialized successfully');
-  
-  console.log('Firebase initialized successfully');
-} catch (error) {
-  console.error('Error initializing Firebase:', error);
-  throw error;
+} else {
+  console.warn('Firebase credentials not configured - Firebase features will be disabled');
 }
 
 // Helper function to get Firestore instance
-export const getFirestoreInstance = (): Firestore => {
+export const getFirestoreInstance = (): Firestore | undefined => {
   if (!firestoreDB) {
-    throw new Error('Firestore not initialized');
+    console.warn('Firestore not initialized - Firebase credentials may be missing');
+    return undefined;
   }
   return firestoreDB;
 };
 
-export { firebaseApp, firestoreDB, firebaseAuth, firebaseStorage };
+export { firebaseApp, firestoreDB, firebaseAuth, firebaseStorage, hasFirebaseCredentials };
