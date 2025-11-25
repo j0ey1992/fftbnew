@@ -28,7 +28,7 @@ export default function Home() {
               minHeight: '100%',
               objectFit: 'cover',
             }}
-            src="/Crypto_space_202511231346_8idz8.mp4"
+            src="/Website background video 1080p.mp4"
             autoPlay
             muted
             loop

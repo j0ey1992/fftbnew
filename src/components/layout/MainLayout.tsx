@@ -567,8 +567,8 @@ export default function MainLayout({ children, className, disablePadding = false
               </a>
             </div>
 
-            <div className="text-center">
-              <p className="text-xl font-bold bg-gradient-to-r from-primary-400 to-cyan-400 bg-clip-text text-transparent">
+            <div className="flex justify-center items-center">
+              <p className="text-xl font-bold bg-gradient-to-r from-primary-400 to-cyan-400 bg-clip-text text-transparent text-center">
                 Made by Kris token
               </p>
             </div>
