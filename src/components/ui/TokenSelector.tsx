@@ -3,8 +3,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { useAppKitAccount } from '@reown/appkit/react';
-import { getEnabledVVSPairs, VVSPair } from '@/lib/firebase'; // Predefined tokens
-import { getImportedTokens, ImportedToken } from '@/lib/firebase/tokens'; // User imported tokens
+import { getEnabledVVSPairs, getImportedTokens } from '@/lib/tokens';
+import { VVSPair, ImportedToken } from '@/types/tokens';
 import { ImportTokenModal } from './ImportTokenModal';
 import { TopGainersDisplay } from '@/components/market/TopGainersDisplay';
 import { VirtualizedTokenList } from '@/components/swap/VirtualizedTokenList';

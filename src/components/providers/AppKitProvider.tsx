@@ -4,7 +4,6 @@ import { ReactNode, useEffect, useState } from 'react'
 import { getAppKit, isConnected, reconnectWallet } from '@/lib/reown/init'
 import { applyReownTheme } from '@/app/theme-utils'
 import { useAppKitAccount } from '@reown/appkit/react'
-import { useReownAuth } from '@/hooks/useReownAuth'
 
 interface AppKitProviderProps {
   children: ReactNode
@@ -94,16 +93,14 @@ export function AppKitProvider({ children }: AppKitProviderProps) {
     }
   }, [isAppKitReady, reconnectionAttempted])
 
-  // Connection state monitoring and authentication
+  // Connection state monitoring
   const ConnectionMonitor = () => {
     const { isConnected, address, status } = useAppKitAccount()
-    const { isLoading, error, isAuthenticated, user } = useReownAuth()
-    
+
     useEffect(() => {
       console.log('Connection state changed:', { isConnected, address, status })
-      console.log('Auth state:', { isLoading, error, isAuthenticated, user: user?.uid })
-    }, [isConnected, address, status, isLoading, error, isAuthenticated, user])
-    
+    }, [isConnected, address, status])
+
     return null // This is just a monitoring component, it doesn't render anything
   }
 

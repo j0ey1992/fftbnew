@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { useTopGainers, DexScreenerPair } from '@/hooks/useTopGainers';
-import { ImportedToken } from '@/lib/firebase/tokens';
-import { VVSPair } from '@/lib/firebase'; // Assuming VVSPair is exported from firebase index
+import { ImportedToken, VVSPair } from '@/types/tokens';
 
 interface TopGainersDisplayProps {
   // Combined list of tokens known by the app (from Firebase + user imports)

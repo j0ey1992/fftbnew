@@ -1,13 +1,11 @@
 import './globals.css'
-import '@/lib/firebase/config' // Import Firebase initialization first!
-import '@/lib/reown/init' // Import AppKit initialization second!
+import '@/lib/reown/init' // Import AppKit initialization
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReownProvider } from '@/components/providers/ReownProvider'
 import { AppKitProvider } from '@/components/providers/AppKitProvider'
 import { QueryClientProvider } from '@/components/providers/QueryClientProvider'
 import { AuthProvider } from '@/components/providers/auth'
-import { FirebaseDataInitializer } from '@/lib/firebase/init-data'
 import ReownClient from './reown-client'
 import { HeadScripts } from './head-scripts'
 import { ViewportHeightFix } from '@/app/viewport-fix'
@@ -43,7 +41,6 @@ export default function RootLayout({
               <AuthProvider>
                 {children}
                 <ReownClient />
-                <FirebaseDataInitializer />
                 <ViewportHeightFix />
               </AuthProvider>
             </AppKitProvider>

@@ -1,12 +1,12 @@
 'use client'
 
-import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
-import { useReownAuth } from '@/hooks/useReownAuth';
+import { createContext, useContext, ReactNode } from 'react';
+import { useAppKitAccount } from '@reown/appkit/react';
 import { normalizeAddress } from '@/utils/addressUtils';
 
 /**
  * Authentication context type definition
- * Updated to use the new simplified wallet-based authentication
+ * Simplified wallet-based authentication without Firebase
  */
 interface AuthContextType {
   user: any;
@@ -26,7 +26,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false,
-  isLoading: true,
+  isLoading: false,
   walletAddress: null,
   error: null,
   userRoles: {
@@ -44,114 +44,39 @@ export const useAuth = () => useContext(AuthContext);
 
 /**
  * Authentication provider component
- * Updated to use the new simplified wallet-based authentication flow
+ * Simplified to use only wallet connection without Firebase
  */
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  // Use the new simplified authentication hook
-  const auth = useReownAuth();
-  const [userRoles, setUserRoles] = useState({
-    isAdmin: false,
-    isProject: false,
-  });
+  const { address, isConnected } = useAppKitAccount();
 
-  // Get user roles from Firebase custom claims
-  useEffect(() => {
-    const getUserRoles = async () => {
-      if (auth.user) {
-        try {
-          // Get the ID token result to access custom claims
-          const idTokenResult = await auth.user.getIdTokenResult();
-          const claims = idTokenResult.claims;
-          
-          // Check if this is the admin wallet address
-          const adminWalletAddress = '0xd3ebf04f76b67e47093bddd8b14f9090f1c80976';
-          const normalizedAdminAddress = normalizeAddress(adminWalletAddress);
-          const normalizedCurrentAddress = auth.walletAddress ? normalizeAddress(auth.walletAddress) : null;
-          const isAdminWallet = normalizedCurrentAddress === normalizedAdminAddress;
-          
-          // Set roles based on claims or admin wallet address
-          setUserRoles({
-            isAdmin: !!claims.admin || isAdminWallet,
-            isProject: !!claims.project,
-          });
-          
-          console.log('AuthProvider - User roles updated:', {
-            adminClaim: claims.admin,
-            projectClaim: claims.project,
-            isAdminWallet,
-            finalRoles: {
-              isAdmin: !!claims.admin || isAdminWallet,
-              isProject: !!claims.project,
-            },
-            walletAddress: auth.walletAddress,
-            normalizedWalletAddress: normalizedCurrentAddress,
-          });
-        } catch (error) {
-          console.error('Error getting user roles:', error);
-          setUserRoles({
-            isAdmin: false,
-            isProject: false,
-          });
-        }
-      } else {
-        setUserRoles({
-          isAdmin: false,
-          isProject: false,
-        });
-      }
-    };
+  // Check if connected wallet is admin
+  const adminWalletAddress = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS || '0xd3ebf04f76b67e47093bddd8b14f9090f1c80976';
+  const normalizedAdminAddress = normalizeAddress(adminWalletAddress);
+  const normalizedCurrentAddress = address ? normalizeAddress(address) : null;
+  const isAdmin = normalizedCurrentAddress === normalizedAdminAddress;
 
-    getUserRoles();
-  }, [auth.user, auth.walletAddress]);
-
-  // Function to refresh Firebase token and update user roles
-  const refreshToken = async () => {
-    if (auth.user) {
-      try {
-        console.log('AuthProvider - Refreshing Firebase token...');
-        // Force refresh the ID token
-        await auth.user.getIdToken(true);
-        
-        // Get updated token result with fresh claims
-        const idTokenResult = await auth.user.getIdTokenResult();
-        const claims = idTokenResult.claims;
-        
-        // Check if this is the admin wallet address
-        const adminWalletAddress = '0xd3ebf04f76b67e47093bddd8b14f9090f1c80976';
-        const normalizedAdminAddress = normalizeAddress(adminWalletAddress);
-        const normalizedCurrentAddress = auth.walletAddress ? normalizeAddress(auth.walletAddress) : null;
-        const isAdminWallet = normalizedCurrentAddress === normalizedAdminAddress;
-        
-        // Update roles with fresh claims
-        setUserRoles({
-          isAdmin: !!claims.admin || isAdminWallet,
-          isProject: !!claims.project,
-        });
-        
-        console.log('AuthProvider - Token refreshed, roles updated:', {
-          adminClaim: claims.admin,
-          projectClaim: claims.project,
-          isAdminWallet,
-          finalRoles: {
-            isAdmin: !!claims.admin || isAdminWallet,
-            isProject: !!claims.project,
-          },
-        });
-      } catch (error) {
-        console.error('Error refreshing token:', error);
-      }
-    }
+  // Simplified logout (just disconnect wallet)
+  const logout = async () => {
+    // Wallet disconnection is handled by the wallet provider
+    console.log('Logout called');
   };
 
-  // Transform the auth data to match the expected interface
+  const refreshToken = async () => {
+    // No-op without Firebase
+    console.log('Token refresh not needed without Firebase');
+  };
+
   const contextValue: AuthContextType = {
-    user: auth.user,
-    isAuthenticated: auth.isAuthenticated,
-    isLoading: auth.isLoading,
-    walletAddress: auth.walletAddress || null,
-    error: auth.error,
-    userRoles,
-    logout: auth.logout,
+    user: isConnected ? { address } : null,
+    isAuthenticated: isConnected,
+    isLoading: false,
+    walletAddress: address || null,
+    error: null,
+    userRoles: {
+      isAdmin,
+      isProject: false,
+    },
+    logout,
     refreshToken,
   };
 

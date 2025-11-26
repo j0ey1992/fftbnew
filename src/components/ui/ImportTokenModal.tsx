@@ -5,7 +5,8 @@ import { ethers } from 'ethers';
 import { useAppKitAccount } from '@reown/appkit/react'; // Only need useAppKitAccount here
 import { getAppKit } from '@/lib/reown/init'; // Import the helper function
 import { Button } from './button'; // Assuming Button component exists
-import { addImportedToken, ImportedToken } from '@/lib/firebase/tokens';
+import { addImportedToken } from '@/lib/tokens';
+import { ImportedToken } from '@/types/tokens';
 import { BuiltInChainId } from '@vvs-finance/swap-sdk'; // Assuming this is the correct chain ID enum
 
 interface ImportTokenModalProps {
