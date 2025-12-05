@@ -1,4 +1,4 @@
-import { Timestamp } from 'firebase/firestore';
+// Using Date | string instead of Firebase Timestamp
 
 export type QuestCategory = "social" | "content" | "web3" | "engagement" | "custom";
 export type QuestDifficulty = "Easy" | "Medium" | "Hard";
@@ -106,8 +106,8 @@ export interface Requirement {
 }
 export interface UserQuestStatus {
   status: SubmissionStatus;
-  submittedAt: Timestamp;
-  completedAt?: Timestamp;
+  submittedAt: Date | string;
+  completedAt?: Date | string;
   proofLink?: string;
   moderationNote?: string;
   completionCount?: number;
@@ -120,7 +120,7 @@ export interface QuestSubmission {
   questId: string;
   walletAddress: string;
   status: SubmissionStatus;
-  submittedAt: Timestamp;
+  submittedAt: Date | string;
   proofLink?: string;
   verificationData?: any;
   moderationNote?: string;
@@ -130,9 +130,9 @@ export interface QuestSubmission {
 export interface QuestParticipation {
   questId: string;
   walletAddress: string;
-  joinedAt: Timestamp;
+  joinedAt: Date | string;
   status: SubmissionStatus;
-  completedAt?: Timestamp;
+  completedAt?: Date | string;
   rewardClaimed?: boolean;
 }
 
@@ -157,9 +157,9 @@ export interface Quest {
     [walletAddress: string]: UserQuestStatus
   };
   userStatus?: UserQuestStatus; // Current user's quest status (populated by backend)
-  createdAt: Timestamp;        // Creation timestamp
-  updatedAt: Timestamp;        // Last update timestamp
-  expiresAt?: Timestamp;       // Expiration timestamp
+  createdAt: Date | string;        // Creation timestamp
+  updatedAt: Date | string;        // Last update timestamp
+  expiresAt?: Date | string;       // Expiration timestamp
   projectName?: string;        // Project name (denormalized)
   projectLogo?: string;        // Project logo URL (denormalized)
   projectBanner?: string;      // Project banner URL (denormalized)
@@ -187,7 +187,7 @@ export interface Quest {
   
   // Additional fields for enhanced quest detail
   creatorType?: 'admin' | 'partner' | 'project'; // Type of quest creator
-  endDate?: Timestamp;                   // Quest end date (in addition to expiresAt)
+  endDate?: Date | string;                   // Quest end date (in addition to expiresAt)
   stats?: {                              // Quest statistics
     totalParticipants: number;
     completedCount: number;
@@ -353,8 +353,8 @@ export interface QuestTemplate {
   aiVerificationCompatible: boolean;
   cronosChainRequired: boolean;
   wizardSteps: WizardStep[];
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface WizardStep {
@@ -403,8 +403,8 @@ export interface WizardSession {
   templateId?: string;
   currentStep: number;
   questData: Partial<Quest>;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: Date | string;
+  updatedAt: Date | string;
   expiresAt: Timestamp;
 }
 
@@ -417,6 +417,6 @@ export interface QuestMetrics {
   fraudDetectionRate: number;
   userSatisfactionScore: number;
   rewardEffectiveness: number;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }

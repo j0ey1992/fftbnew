@@ -1,7 +1,5 @@
-import { Timestamp } from 'firebase/firestore';
-
 /**
- * Contract template model for storing contract templates in Firebase
+ * Contract template model for storing contract templates
  */
 export interface ContractTemplate {
   id: string;
@@ -13,8 +11,8 @@ export interface ContractTemplate {
   bytecode: string;
   abi: any[];
   parameters: ParameterDefinition[];
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: Date | string;
+  updatedAt: Date | string;
   enabled: boolean;
 }
 
@@ -46,7 +44,7 @@ export interface DeployedContract {
   ownerAddress: string;
   parameters: Record<string, any>;
   transactionHash: string;
-  createdAt: Timestamp;
+  createdAt: Date | string;
   contractType: string;
   name: string;
 }

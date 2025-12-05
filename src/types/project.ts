@@ -1,4 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
 /**
@@ -224,8 +223,8 @@ export type ProjectVisibility = 'public' | 'private' | 'unlisted';
  */
 export interface ProjectSettings {
   visibility: ProjectVisibility;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 /**
@@ -251,8 +250,8 @@ export interface ProjectPage {
   description?: string;
   isHomePage: boolean;
   componentRegistry?: ProjectComponent[];
-  createdAt?: Timestamp;
-  updatedAt?: Timestamp;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }
 
 /**
@@ -328,7 +327,7 @@ export const defaultDomain: ProjectDomain = {
 /**
  * Default project settings
  */
-export const defaultSettings = (now: Timestamp): ProjectSettings => ({
+export const defaultSettings = (now: Date | string = new Date()): ProjectSettings => ({
   visibility: 'public',
   createdAt: now,
   updatedAt: now,
