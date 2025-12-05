@@ -1,18 +1,9 @@
 import './globals.css'
-import '@/lib/firebase/config' // Import Firebase initialization first!
-import '@/lib/reown/init' // Import AppKit initialization second!
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { ReownProvider } from '@/components/providers/ReownProvider'
-import { AppKitProvider } from '@/components/providers/AppKitProvider'
 import { QueryClientProvider } from '@/components/providers/QueryClientProvider'
 import { AuthProvider } from '@/components/providers/auth'
-import { FirebaseDataInitializer } from '@/lib/firebase/init-data'
-import ReownClient from './reown-client'
 import { HeadScripts } from './head-scripts'
 import { ViewportHeightFix } from '@/app/viewport-fix'
-
-const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] })
 
 export const metadata: Metadata = {
   title: 'FFTB | Fortune Favors The Brave',
@@ -36,18 +27,12 @@ export default function RootLayout({
       <head>
         <HeadScripts />
       </head>
-      <body className={inter.className}>
+      <body className="font-sans antialiased">
         <QueryClientProvider>
-          <ReownProvider>
-            <AppKitProvider>
-              <AuthProvider>
-                {children}
-                <ReownClient />
-                <FirebaseDataInitializer />
-                <ViewportHeightFix />
-              </AuthProvider>
-            </AppKitProvider>
-          </ReownProvider>
+          <AuthProvider>
+            {children}
+            <ViewportHeightFix />
+          </AuthProvider>
         </QueryClientProvider>
       </body>
     </html>

@@ -5,47 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useAppKit, useAppKitAccount } from '@reown/appkit/react'
-
-// Wallet Icon
-function WalletIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
-    </svg>
-  )
-}
-
-// Custom Reown button component
-function CustomReownButton() {
-  const { open } = useAppKit()
-  const { status, isConnected, address } = useAppKitAccount()
-  const isConnecting = status === 'connecting' || status === 'reconnecting'
-
-  const formatAddress = (address: string | undefined) => {
-    if (!address) return '';
-    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
-  };
-
-  return (
-    <button
-      className="relative flex items-center justify-center px-4 py-2 min-w-[120px] h-9 rounded-lg font-medium text-xs text-white overflow-hidden transition-all duration-300 bg-gradient-to-br from-[#1199fa] via-[#0e8fe8] to-[#0b85d8] hover:from-[#0d7ac9] hover:via-[#0a80d2] hover:to-[#0970b8] shadow-[0_2px_10px_rgba(17,153,250,0.25)] hover:shadow-[0_4px_16px_rgba(17,153,250,0.35)] group backdrop-blur-sm"
-      onClick={() => open()}
-      disabled={isConnecting}
-    >
-      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
-
-      <div className="flex items-center justify-center gap-2">
-        <WalletIcon className="h-4 w-4" />
-        <span className="font-semibold uppercase tracking-wide text-xs">
-          {isConnecting ? 'Connecting...' : isConnected ? formatAddress(address) : 'Connect Wallet'}
-        </span>
-      </div>
-
-      <span className="absolute inset-0 rounded-lg border border-white/10"></span>
-    </button>
-  )
-}
 
 // Hamburger Menu Button
 function HamburgerButton({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) {
@@ -106,8 +65,6 @@ export default function FFTBLayout({ children, className }: FFTBLayoutProps) {
     { name: 'Home', href: '/' },
     { name: 'Chart', href: '/chart' },
     { name: 'Listings', href: '/listings' },
-    { name: 'Bridge', href: '/bridge' },
-    { name: 'Staking', href: '/staking' },
     { name: 'How to Buy', href: '/how-to-buy' },
     { name: 'Roadmap', href: '/roadmap' }
   ];
@@ -169,9 +126,8 @@ export default function FFTBLayout({ children, className }: FFTBLayoutProps) {
               ))}
             </nav>
 
-            {/* Right side - Wallet button */}
+            {/* Right side - Mobile menu button */}
             <div className="flex items-center space-x-4">
-              <CustomReownButton />
               <HamburgerButton isOpen={mobileMenuOpen} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} />
             </div>
           </div>

@@ -1,4 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
 import { QuestCategory, QuestDifficulty, RequirementType, SubmissionStatus } from './quest';
 
 export interface Submission {
@@ -7,9 +6,9 @@ export interface Submission {
   walletAddress: string;       // User wallet address
   proofLink: string;           // Proof URL or transaction hash
   status: SubmissionStatus;    // Submission status
-  submittedAt: Timestamp;      // Submission timestamp
-  verifiedAt?: Timestamp;      // Verification timestamp
-  moderatedAt?: Timestamp;     // Moderation timestamp
+  submittedAt: Date | string;  // Submission timestamp
+  verifiedAt?: Date | string;  // Verification timestamp
+  moderatedAt?: Date | string; // Moderation timestamp
   moderatedBy?: string;        // Moderator address or "system"
   moderationNote?: string;     // Moderation notes
   questTitle: string;          // Quest title (denormalized)
@@ -29,13 +28,13 @@ export interface Submission {
     verified: boolean;
     details: string;
     analysisType?: string;     // Type of analysis performed
-    analysisTimestamp?: Timestamp; // When analysis was performed
+    analysisTimestamp?: Date | string; // When analysis was performed
   };
   moderationDecision?: {       // Automated moderation decision
     autoApprove: boolean;
     confidence: number;
     reason: string;
-    decisionTimestamp?: Timestamp; // When decision was made
+    decisionTimestamp?: Date | string; // When decision was made
     decisionFactors?: string[]; // Factors that influenced the decision
   };
   autoModerated?: boolean;     // Whether auto-moderated

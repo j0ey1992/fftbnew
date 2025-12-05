@@ -1,4 +1,4 @@
-import { Timestamp } from 'firebase/firestore';
+// Using Date | string instead of Firebase Timestamp
 import { Quest, QuestCategory, QuestDifficulty, QuestStatus, Requirement } from './quest';
 
 export type CampaignType = 'campaign';
@@ -48,9 +48,9 @@ export interface UserCampaign extends Omit<Quest, 'projectId' | 'createdBy' | 'c
   payment: {
     status: PaymentStatus;
     txHash?: string;
-    paidAt?: Timestamp;
+    paidAt?: Date | string;
     refundTxHash?: string;
-    refundedAt?: Timestamp;
+    refundedAt?: Date | string;
     transaction?: PaymentTransaction;
   };
   
@@ -59,7 +59,7 @@ export interface UserCampaign extends Omit<Quest, 'projectId' | 'createdBy' | 'c
     autoApprove: boolean; // Whether submissions are auto-approved
     requiresManualReview: boolean; // Whether manual review is required
     maxSubmissions?: number; // Maximum number of submissions allowed
-    submissionDeadline?: Timestamp; // Deadline for submissions
+    submissionDeadline?: Date | string; // Deadline for submissions
   };
   
   // Analytics
@@ -86,7 +86,7 @@ export interface CreateCampaignData {
   tokenDecimals: number;
   participantLimit: number | "unlimited";
   requirements: Requirement[];
-  expiresAt?: Timestamp;
+  expiresAt?: Date | string;
   verificationInstructions?: string;
   
   // Campaign specific
@@ -94,7 +94,7 @@ export interface CreateCampaignData {
     autoApprove: boolean;
     requiresManualReview: boolean;
     maxSubmissions?: number;
-    submissionDeadline?: Timestamp;
+    submissionDeadline?: Date | string;
   };
 }
 

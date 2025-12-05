@@ -1,14 +1,12 @@
-import { Timestamp } from 'firebase/firestore';
-
 export interface CompletedQuest {
   questId: string;             // ID of the completed quest
-  completedAt: Timestamp;      // When the quest was completed
+  completedAt: Date | string;  // When the quest was completed
   xpReward: number;            // XP reward for completing the quest
 }
 
 export interface SocialShare {
   questId: string;             // ID of the shared quest
-  sharedAt: Timestamp;         // When the quest was shared
+  sharedAt: Date | string;     // When the quest was shared
   platform: 'twitter' | 'discord' | 'telegram' | 'other'; // Platform where quest was shared
   url?: string;                // URL of the share (if available)
 }
@@ -43,10 +41,10 @@ export interface User {
   isAdmin?: boolean;           // Whether user is an admin
   profileComplete?: boolean;   // Whether profile is complete
   mobileProfileComplete?: boolean; // Whether mobile profile is complete
-  createdAt: Timestamp;        // Account creation timestamp
-  updatedAt: Timestamp;        // Last update timestamp
-  lastMobileAccess?: Timestamp; // Last mobile access timestamp
-  lastDesktopAccess?: Timestamp; // Last desktop access timestamp
+  createdAt: Date | string;    // Account creation timestamp
+  updatedAt: Date | string;    // Last update timestamp
+  lastMobileAccess?: Date | string; // Last mobile access timestamp
+  lastDesktopAccess?: Date | string; // Last desktop access timestamp
   deviceType?: "mobile" | "desktop"; // Last device type used
 }
 
